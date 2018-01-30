@@ -1,4 +1,4 @@
-export const mockData = {
+module.exports = {
   "people": {
     "count": 1, 
     "next": "https://swapi.co/api/people/?page=2", 

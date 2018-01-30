@@ -3,15 +3,15 @@ export default class SwapiCleaner {
     this.responseData = responseData;
   }
 
-
-
   randomMovieCall(movieArray) {
     const romanId = this.romanize(movieArray.episode_id);
 
-    return {scrollText: movieArray.opening_crawl,
-            title: movieArray.title,
-            releaseDate: movieArray.release_date,
-            episode: romanId};
+    return {
+      scrollText: movieArray.opening_crawl,
+      title: movieArray.title,
+      releaseDate: movieArray.release_date,
+      episode: romanId
+    };
   }
 
   randomMovieNumber() {

@@ -22,7 +22,6 @@ class App extends Component {
 
   componentDidMount() {
     this.cleaner = new Cleaner();
-    console.log("hi")
     //this.apiCall('films')
   }
 
