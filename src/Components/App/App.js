@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      scrollText: "",
+      scrollText: {},
       people: [],
       planets: [],
       vehicles: [],
@@ -19,27 +19,27 @@ class App extends Component {
     this.cleaner = null
   }
 
-
   componentDidMount() {
+    this.cleaner = new Cleaner();
     console.log("hi")
     this.apiCall('films')
   }
 
   apiCall(resource) {
+    const randNum = this.cleaner.randomMovieNumber();
+    console.log(randNum);
     const root = `https://swapi.co/api/`
-    fetch(`${root}${resource}`)
+    fetch(`${root}${resource}/${randNum}`)
     .then( response => response.json())
     .then( json => {
-      this.cleaner = new Cleaner(json);
-      this.cleaner.randomMovieCall(json.results)
-
+      this.setState({ scrollText: this.cleaner.randomMovieCall(json) })
     })
   }
 
   render() {
     return (
       <div className="App">
-        <ScrollContainer />
+        <ScrollContainer movieData={this.state.scrollText}/>
         <Header />
         <CardContainer />
       </div>
