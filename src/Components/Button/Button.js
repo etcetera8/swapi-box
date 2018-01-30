@@ -1,9 +1,11 @@
 import React from 'react';
 import './Button.css';
 
-const Button = ({ name }) => {
+const Button = ({ name, resourceCall }) => {
   return (
-    <button className='Button'> 
+    <button 
+      className='Button'
+      onClick={() => resourceCall(name)}> 
       {name}
     </button>
   )
