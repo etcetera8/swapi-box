@@ -37,14 +37,15 @@ class App extends Component {
 
   resourceCall = (resource) => {
     if(this.state[resource].length === 0) {
-      console.log("hi", resource)
       fetch(`${this.state.root}${resource}`)
       .then( response => response.json())
       .then( json => {
         console.log(json);
-        this.setState({people: json.results})
-      })
+        this.setState({[resource]: json.results})
+      }) 
 
+    } else {
+      console.log("full")
     }
   }
 
