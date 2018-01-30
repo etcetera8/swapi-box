@@ -19,31 +19,32 @@ export default class SwapiCleaner {
   }
 
   romanize(num) {
-
+    let romNumeral = '';
     switch (num) {
       case 1:
-        return "I"
+        romNumeral = "I"
         break;
       case 2: 
-        return "II"
+        romNumeral = "II"
         break;
       case 3:
-        return "III"
+        romNumeral = "III"
         break;
       case 4: 
-        return "IV"
+        romNumeral = "IV"
         break;
       case 5: 
-        return "V"
+        romNumeral = "V"
         break;
       case 6: 
-        return "VI"
+        romNumeral = "VI"
         break;
       case 7:
-        return "VII"
+        romNumeral = "VII"
         break;
       default:
         return "An episode"
     }
+    return romNumeral;
   }
 }

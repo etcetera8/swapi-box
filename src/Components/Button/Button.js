@@ -1,12 +1,12 @@
 import React from 'react';
 import './Button.css';
 
-const Button = () => {
+const Button = ({ name }) => {
   return (
     <button className='Button'> 
-      button
+      {name}
     </button>
   )
 }
 
-export default CardContainer;
+export default Button;

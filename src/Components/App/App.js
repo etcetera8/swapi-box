@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import ScrollContainer from '../ScrollContainer/ScrollContainer';
 import CardContainer from '../CardContainer/CardContainer';
+import Button from '../Button/Button';
 import Cleaner from '../../helper';
 import './App.css';
 
@@ -22,12 +23,11 @@ class App extends Component {
   componentDidMount() {
     this.cleaner = new Cleaner();
     console.log("hi")
-    this.apiCall('films')
+    //this.apiCall('films')
   }
 
   apiCall(resource) {
     const randNum = this.cleaner.randomMovieNumber();
-    console.log(randNum);
     const root = `https://swapi.co/api/`
     fetch(`${root}${resource}/${randNum}`)
     .then( response => response.json())
@@ -41,6 +41,11 @@ class App extends Component {
       <div className="App">
         <ScrollContainer movieData={this.state.scrollText}/>
         <Header />
+        <div>
+          <Button name="People"/>
+          <Button name="Planets"/>
+          <Button name="Vehicles"/>
+        </div>
         <CardContainer />
       </div>
     );
