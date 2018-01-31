@@ -17,38 +17,36 @@ export default class SwapiCleaner {
 
   getPeople = async() => {
     const peopleArray =  await fetch(`${this.root}people`)
-      .then( response => response.json())
-      const cleaned = await this.cleanHomeworld(peopleArray.results)
-      const cleanedSpecies = await this.cleanSpecies(cleaned);
+      const arrayResults = await peopleArray.json();
+      const cleanedHomeworld = await this.cleanHomeworld(arrayResults.results)
+      const cleanedSpecies = await this.cleanSpecies(cleanedHomeworld);
       return cleanedSpecies;
   }
 
   cleanHomeworld = async(peopleArray) => {
     peopleArray = peopleArray.splice(0,3);
     const unresolvedPeople = await peopleArray.map(async (person) => {
-      return fetch(person.homeworld)
-             .then(data => data.json())
-             .then(homeworld => {
-                let { name, population } = homeworld;
-                return ({...person, homeworld: name, population })
-              })
+      const homeworld = await fetch(person.homeworld)
+      const homeworldObject = await homeworld.json()
+      const { name, population } = homeworldObject;
+      return ({...person, homeworld: name, population })      
     })
     return Promise.all(unresolvedPeople)
   }   
 
   cleanSpecies = async(peopleArray) => {
     const unresolvedPeople = await peopleArray.map(async (person) => {
-      return fetch(person.species)
-             .then(data => data.json())
-             .then(species => {
-                let {name} = species;
-                return ({...person, 
-                        species: name,
-                        name: person.name,
-                        homeworld: person.homeworld,
-                        population: person.population
-                        })
-              })
+      const speci = await fetch(person.species)
+      const species = await speci.json()
+      const {name} = species;
+      const { homeworld, population } = person;
+      return ({
+        name: person.name,
+        homeworld,
+        population,
+        species: name,
+        favorite: false,
+      })        
     })
     return Promise.all(unresolvedPeople)
   }
