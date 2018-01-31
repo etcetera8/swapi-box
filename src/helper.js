@@ -29,7 +29,10 @@ export default class SwapiCleaner {
     const unresolvedPeople = await peopleArray.map(async (person) => {
       return fetch(person.homeworld)
              .then(data => data.json())
-             .then(homeworld => ({...person, homeworld}))
+             .then(homeworld => {
+                let { name, population } = homeworld;
+                return ({...person, homeworld: name, population })
+              })
     })
     return Promise.all(unresolvedPeople)
     .then(results => results)
