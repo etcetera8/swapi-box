@@ -1,5 +1,33 @@
 .Card {
-  border: 1px solid blue;
-  height: 50px;
-  width: 50px;
+  margin: 10px;
+  border: 1px solid yellow;
+  height: 250px;
+  width: 200px;
+  box-shadow: 5px 7px rgba(0,0,0, 0.2);
+  padding-right: 7px;
+  box-sizing: border-box;
+}
+
+header {
+  border-bottom: 1px solid yellow;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  margin: 7px;
+}
+
+.favorite {
+  margin: 7px;
+}
+
+.categories {
+  list-style: none;
+  padding: 7px;
+}
+
+.categories li {
+  margin: 7px;
 }
