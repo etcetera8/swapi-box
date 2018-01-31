@@ -34,6 +34,12 @@ class App extends Component {
     })
   }
 
+  setPeopleState = async () => {
+    const people = await this.cleaner.getPeople()
+    console.log(people);
+    this.setState({people})
+  }
+
   render() {
     return (
       <div className="App">
@@ -41,7 +47,7 @@ class App extends Component {
         <nav className="button-container">
           <Button 
             name="people"
-            resourceCall={this.cleaner.getPeople}/>
+            resourceCall={this.setPeopleState}/>
           <Button 
             name="planets"
             resourceCall={this.resourceCall}/>

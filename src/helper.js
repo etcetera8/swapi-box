@@ -15,13 +15,12 @@ export default class SwapiCleaner {
     };
   }
 
-  getPeople = async(resource) => {
-    const peopleArray =  await fetch(`${this.root}${resource}`)
+  getPeople = async() => {
+    const peopleArray =  await fetch(`${this.root}people`)
       .then( response => response.json())
-    const cleaned = await this.cleanHomeworld(peopleArray.results)
-    const cleanedSpecies = await this.cleanSpecies(cleaned);
-    console.log(cleanedSpecies);
-    return cleanedSpecies;
+      const cleaned = await this.cleanHomeworld(peopleArray.results)
+      const cleanedSpecies = await this.cleanSpecies(cleaned);
+      return cleanedSpecies;
   }
 
   cleanHomeworld = async(peopleArray) => {
@@ -52,7 +51,6 @@ export default class SwapiCleaner {
               })
     })
     return Promise.all(unresolvedPeople)
-
   }
 
   randomMovieNumber() {

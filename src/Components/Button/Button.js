@@ -5,7 +5,7 @@ const Button = ({ name, resourceCall }) => {
   return (
     <button 
       className='Button'
-      onClick={() => resourceCall(name)}> 
+      onClick={resourceCall}> 
       {name}
     </button>
   )
