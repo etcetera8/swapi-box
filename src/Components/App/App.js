@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../Header/Header';
+//import Header from '../Header/Header';
 import ScrollContainer from '../ScrollContainer/ScrollContainer';
 import CardContainer from '../CardContainer/CardContainer';
 import Button from '../Button/Button';
@@ -53,8 +53,7 @@ class App extends Component {
     return (
       <div className="App">
         <ScrollContainer movieData={this.state.scrollText}/>
-        <Header />
-        <div>
+        <nav className="button-container">
           <Button 
             name="people"
             resourceCall={this.resourceCall}/>
@@ -64,7 +63,7 @@ class App extends Component {
           <Button 
             name="vehicles"
             resourceCall={this.resourceCall}/>
-        </div>
+        </nav>
         <CardContainer />
       </div>
     );

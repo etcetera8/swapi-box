@@ -1,5 +1,11 @@
 .App {
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; 
+}
