@@ -11,7 +11,6 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      root: `https://swapi.co/api/`,
       scrollText: {},
       people: [],
       planets: [],
@@ -35,22 +34,6 @@ class App extends Component {
     })
   }
 
-  resourceCall = (resource) => {
-    if(this.state[resource].length === 0) {
-      fetch(`${this.state.root}${resource}`)
-      .then( response => response.json())
-      .then( json => {
-        console.log(json.results);
-        let cleanedPeople = this.cleaner.cleanPeople(json.results);
-        console.log(cleanedPeople);
-        //this.setState({[resource]: json.results}, () => )
-      }) 
-
-    } else {
-      console.log("full")
-    }
-  }
-
   render() {
     return (
       <div className="App">
@@ -58,7 +41,7 @@ class App extends Component {
         <nav className="button-container">
           <Button 
             name="people"
-            resourceCall={this.resourceCall}/>
+            resourceCall={this.cleaner.getPeople}/>
           <Button 
             name="planets"
             resourceCall={this.resourceCall}/>

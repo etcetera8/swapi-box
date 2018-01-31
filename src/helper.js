@@ -1,7 +1,8 @@
 export default class SwapiCleaner {
   constructor(responseData) {
     this.responseData = responseData;
-  }
+    this.root = `https://swapi.co/api/`
+  }  
 
   randomMovieCall(movieArray) {
     const romanId = this.romanize(movieArray.episode_id);
@@ -14,18 +15,45 @@ export default class SwapiCleaner {
     };
   }
 
-  cleanPeople(peopleArray) {
-    let cleanedPeople = peopleArray.map( person => {
-      return {
-        name: person.name,
-        homeworld: person.homeworld,
-        species: person.species[0],
-        population: person.homeworld, 
-        favorite: false
-      }
-    })
-    return cleanedPeople;
+  getPeople = (resource) => {
+      fetch(`${this.root}${resource}`)
+      .then( response => response.json())
+      .then( json => { 
+        const cleanedPeople = this.cleanPeople(json.results);
+      })
+      console.log(cleanedPeople)
   }
+
+  cleanPeople(peopleArray) {
+    peopleArray = peopleArray.splice(0,3);
+    console.log(peopleArray);
+    const unresolvedPeople = peopleArray.map(person => {
+      return fetch(person.homeworld)
+             .then(data => data.json())
+             .then(homeworld => ({...person, homeworld}))
+    })
+    const personArray = Promise.all(unresolvedPeople)
+    .then(result => console.log(result));
+    
+    console.log(unresolvedPeople);
+    return personArray
+
+    // const cleanedPeople = peopleArray.map( person => {
+    //   fetch(person.homeworld)
+    //   .then(response => response.json())
+    //   .then(homeworldData => { 
+    //     return {
+    //       name: person.name,
+    //       homeworld: homeworldData.name,
+    //       species: person.species,
+    //       population: homeworldData.population, 
+    //       favorite: false
+    //     }
+    //   })
+
+    //})
+  }
+
 
   randomMovieNumber() {
     return Math.floor(Math.random() * 7 + 1)
