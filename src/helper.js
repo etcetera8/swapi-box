@@ -18,17 +18,15 @@ export default class SwapiCleaner {
   getPeople = async(resource) => {
     const peopleArray =  await fetch(`${this.root}${resource}`)
       .then( response => response.json())
-      // .then( json => console.log(this.cleanPeople(json.results)))
-      // .then( people => console.log(people))
-    console.log(peopleArray.results)
-    const cleaned = await this.cleanPeople(peopleArray.results)
-    console.log(cleaned);
-    //return ()
+    const cleaned = await this.cleanHomeworld(peopleArray.results)
+    const cleanedSpecies = await this.cleanSpecies(cleaned);
+    console.log(cleanedSpecies);
+    return cleaned;
   }
 
-  cleanPeople = async(peopleArray) => {
+  cleanHomeworld = async(peopleArray) => {
     peopleArray = peopleArray.splice(0,3);
-    const unresolvedPeople = peopleArray.map(async (person) => {
+    const unresolvedPeople = await peopleArray.map(async (person) => {
       return fetch(person.homeworld)
              .then(data => data.json())
              .then(homeworld => ({...person, homeworld}))
@@ -36,6 +34,20 @@ export default class SwapiCleaner {
     return Promise.all(unresolvedPeople)
     .then(results => results)
   }   
+
+  cleanSpecies = async(peopleArray) => {
+    const unresolvedPeople = await peopleArray.map(async (person) => {
+      return fetch(person.species)
+             .then(data => data.json())
+             .then(species => {
+                let {name} = species;
+                return ({...person, species: name})
+              })
+    })
+    return Promise.all(unresolvedPeople)
+    .then(results => results)
+
+  }
 
     // const cleanedPeople = peopleArray.map( person => {
     //   fetch(person.homeworld)
