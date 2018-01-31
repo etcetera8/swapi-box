@@ -6,10 +6,14 @@ const ScrollContainer = ( {movieData} ) => {
   
   return (
     <section className='ScrollContainer'>
-      <h2>{title}</h2>
-      <h3>Episode: {episode}</h3>
-      <p>{scrollText}</p>
-      <h3>{releaseDate}</h3>
+      <div className="crawl">
+        <h1 className="swapi-title">SWAPI-BOX </h1>
+        <br />
+        <p>{scrollText}</p>
+        <h3>{releaseDate}</h3>
+        <h2>{title}</h2>
+        <h3>Episode: {episode}</h3>
+      </div>
     </section>
   )
 }

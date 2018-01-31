@@ -1,4 +1,40 @@
 .ScrollContainer {
-  background: gray;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  perspective: 150px;
+  color: #f3da4a;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 500%;
+  font-weight: 600;
+  letter-spacing: 3px;
+  line-height: 150%;
+  text-align: justify;
+  background: #000;
   width: 100%;
+  overflow: hidden;
+}
+
+.swapi-title {
+  font-size: 2em;
+}
+
+.crawl {
+  position: relative;
+  top: -100px;
+  transform-origin: 50% 100%; 
+  animation: crawl 60s linear;
+}
+
+@keyframes crawl {
+  0% {
+    top: 0;
+    transform: rotateX(20deg) translateZ(0);
+  }
+
+  100% {
+    top: -6000px;
+    transform: rotateX(25deg) translateZ(-2500px);
+  }
+
 }
