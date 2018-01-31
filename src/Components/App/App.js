@@ -27,7 +27,7 @@ class App extends Component {
 
   apiCall(resource) {
     const randNum = this.cleaner.randomMovieNumber();
-    fetch(`${this.state.root}${resource}/${randNum}`)
+    fetch(`https://swapi.co/api/${resource}/${randNum}`)
     .then( response => response.json())
     .then( json => {
       this.setState({ scrollText: this.cleaner.randomMovieCall(json) })

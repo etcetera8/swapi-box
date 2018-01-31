@@ -21,7 +21,7 @@ export default class SwapiCleaner {
     const cleaned = await this.cleanHomeworld(peopleArray.results)
     const cleanedSpecies = await this.cleanSpecies(cleaned);
     console.log(cleanedSpecies);
-    return cleaned;
+    return cleanedSpecies;
   }
 
   cleanHomeworld = async(peopleArray) => {
@@ -35,7 +35,6 @@ export default class SwapiCleaner {
               })
     })
     return Promise.all(unresolvedPeople)
-    .then(results => results)
   }   
 
   cleanSpecies = async(peopleArray) => {
@@ -44,30 +43,17 @@ export default class SwapiCleaner {
              .then(data => data.json())
              .then(species => {
                 let {name} = species;
-                return ({...person, species: name})
+                return ({...person, 
+                        species: name,
+                        name: person.name,
+                        homeworld: person.homeworld,
+                        population: person.population
+                        })
               })
     })
     return Promise.all(unresolvedPeople)
-    .then(results => results)
 
   }
-
-    // const cleanedPeople = peopleArray.map( person => {
-    //   fetch(person.homeworld)
-    //   .then(response => response.json())
-    //   .then(homeworldData => { 
-    //     return {
-    //       name: person.name,
-    //       homeworld: homeworldData.name,
-    //       species: person.species,
-    //       population: homeworldData.population, 
-    //       favorite: false
-    //     }
-    //   })
-
-    //})
- 
-
 
   randomMovieNumber() {
     return Math.floor(Math.random() * 7 + 1)
