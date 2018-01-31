@@ -5,7 +5,8 @@ import './CardContainer.css';
 const CardContainer = () => {
   return (
     <section className='CardContainer'> 
-      <h1>im a card container</h1>
+      <Card />
+      <Card />
       <Card />
     </section>
   )
