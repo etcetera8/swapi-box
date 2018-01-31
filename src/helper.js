@@ -14,6 +14,19 @@ export default class SwapiCleaner {
     };
   }
 
+  cleanPeople(peopleArray) {
+    let cleanedPeople = peopleArray.map( person => {
+      return {
+        name: person.name,
+        homeworld: person.homeworld,
+        species: person.species[0],
+        population: person.homeworld, 
+        favorite: false
+      }
+    })
+    return cleanedPeople;
+  }
+
   randomMovieNumber() {
     return Math.floor(Math.random() * 7 + 1)
   }

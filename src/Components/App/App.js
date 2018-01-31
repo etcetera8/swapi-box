@@ -18,7 +18,7 @@ class App extends Component {
       vehicles: [],
       favorites: []
     }
-    this.cleaner = null
+    this.cleaner = new Cleaner()
   }
 
   componentDidMount() {
@@ -40,8 +40,10 @@ class App extends Component {
       fetch(`${this.state.root}${resource}`)
       .then( response => response.json())
       .then( json => {
-        console.log(json);
-        this.setState({[resource]: json.results})
+        console.log(json.results);
+        let cleanedPeople = this.cleaner.cleanPeople(json.results);
+        console.log(cleanedPeople);
+        //this.setState({[resource]: json.results}, () => )
       }) 
 
     } else {
