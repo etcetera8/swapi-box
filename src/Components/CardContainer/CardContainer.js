@@ -8,7 +8,7 @@ const CardContainer = (props) => {
     {!this.props &&
       <p>welcome</p>
     }
-
+    <Card />
     </section>
   )
 }

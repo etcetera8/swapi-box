@@ -15,28 +15,27 @@ export default class SwapiCleaner {
     };
   }
 
-  getPeople = (resource) => {
-      fetch(`${this.root}${resource}`)
+  getPeople = async(resource) => {
+    const peopleArray =  await fetch(`${this.root}${resource}`)
       .then( response => response.json())
-      .then( json => { 
-        const cleanedPeople = this.cleanPeople(json.results);
-      })
-      console.log(cleanedPeople)
+      // .then( json => console.log(this.cleanPeople(json.results)))
+      // .then( people => console.log(people))
+    console.log(peopleArray.results)
+    const cleaned = await this.cleanPeople(peopleArray.results)
+    console.log(cleaned);
+    //return ()
   }
 
-  cleanPeople(peopleArray) {
+  cleanPeople = async(peopleArray) => {
     peopleArray = peopleArray.splice(0,3);
-    console.log(peopleArray);
-    const unresolvedPeople = peopleArray.map(person => {
+    const unresolvedPeople = peopleArray.map(async (person) => {
       return fetch(person.homeworld)
              .then(data => data.json())
              .then(homeworld => ({...person, homeworld}))
     })
-    const personArray = Promise.all(unresolvedPeople)
-    .then(result => console.log(result));
-    
-    console.log(unresolvedPeople);
-    return personArray
+    return Promise.all(unresolvedPeople)
+    .then(results => results)
+  }   
 
     // const cleanedPeople = peopleArray.map( person => {
     //   fetch(person.homeworld)
@@ -52,7 +51,7 @@ export default class SwapiCleaner {
     //   })
 
     //})
-  }
+ 
 
 
   randomMovieNumber() {
