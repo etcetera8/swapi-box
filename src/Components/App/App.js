@@ -22,7 +22,7 @@ class App extends Component {
 
   componentDidMount() {
     this.cleaner = new Cleaner();
-    this.apiCall('films')
+    //this.apiCall('films')
   }
 
   apiCall(resource) {
@@ -35,18 +35,35 @@ class App extends Component {
   }
 
   setPeopleState = async () => {
-    const people = await this.cleaner.getPeople()
-    this.setState({people})
+    if (!localStorage.getItem('people')) {
+      const people = await this.cleaner.getPeople()
+      this.setState({people})
+      localStorage.setItem('people', JSON.stringify(people))
+    } else {
+      console.log('peep from loc');
+      this.setState({people: JSON.parse(localStorage.getItem("people"))})
+    }
   }
 
   setPlanetState = async () => {
-    const planets = await this.cleaner.getPlanets()
-    this.setState({planets})
+    if (!localStorage.getItem('planets')) { 
+      const planets = await this.cleaner.getPlanets()
+      this.setState({planets})
+      localStorage.setItem('planets', JSON.stringify(planets))
+    } else {
+      console.log("from loc");
+      this.setState({planets: JSON.parse(localStorage.getItem('planets'))})
+    }
   }
 
   setVehicleState = async () => {
-    const vehicles = await this.cleaner.getVehicles()
-    this.setState({vehicles})
+    if (!localStorage.getItem('vehicles')) {
+      const vehicles = await this.cleaner.getVehicles()
+      this.setState({vehicles})
+      localStorage.setItem('vehicles', JSON.stringify(vehicles))
+    } else {
+      this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))})
+    }
   }
 
   render() {
