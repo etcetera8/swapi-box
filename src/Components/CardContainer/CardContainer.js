@@ -1,10 +1,10 @@
 import React from 'react';
-import Card from '../Card/Card'
-import PlanetCard from '../PlanetCard/PlanetCard'
+import Card from '../Card/Card';
+import PlanetCard from '../PlanetCard/PlanetCard';
 import './CardContainer.css';
 
 const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activeCategory}) => {
-  console.log(activeCategory);
+  
   const favorited = (favorited) => {
     const match = favorites.find(card => card.favorite === favorited)
     return match ? "favorited" : "";
@@ -21,9 +21,8 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       key={index} />
   )
 
-  console.log(peopleCards)
-
   const planetCards = planets.map((planet, index) => {
+    console.log(planet.favorite);
     return <PlanetCard
       className={favorited(planet.favorite)}
       setFavorite={setFavorite}
@@ -35,7 +34,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       key={index}
     />
   })
-  console.log(planetCards);
+
   if (activeCategory==='planets') {
     return (
       <section className='CardContainer'>

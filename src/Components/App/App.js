@@ -39,7 +39,6 @@ class App extends Component {
       this.setState({people})
       localStorage.setItem('people', JSON.stringify(people))
     } else {
-      console.log('peep from loc');
       this.setState({people: JSON.parse(localStorage.getItem("people"))})
     }
     this.setState({activeCategory: "people"})
@@ -67,10 +66,10 @@ class App extends Component {
     }
 
     this.setState({activeCategory: "vehicles"})
-
   }
 
   setFavoriteState = (cardName, category) => {
+    
     const {favorites} = this.state;
     const target = this.state[category].find(card => { 
       card.name === cardName ? card.favorite = true : null;
