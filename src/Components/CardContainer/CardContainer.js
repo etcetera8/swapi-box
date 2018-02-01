@@ -3,7 +3,8 @@ import Card from '../Card/Card'
 import PlanetCard from '../PlanetCard/PlanetCard'
 import './CardContainer.css';
 
-const CardContainer = ({people, planets, vehicles, favorites, setFavorite}) => {
+const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activeCategory}) => {
+  console.log(activeCategory);
   const favorited = (favorited) => {
     const match = favorites.find(card => card.favorite === favorited)
     return match ? "favorited" : "";
@@ -35,16 +36,45 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite}) => {
     />
   })
   console.log(planetCards);
+  if (activeCategory==='planets') {
+    return (
+      <section className='CardContainer'>
+        {planetCards}
+      </section>
+    )
+  }
 
-  return (
-    <section className='CardContainer'> 
-    {people.length === 0 &&
-      <p>welcome</p>
-    }
-    {peopleCards}
-    {planetCards}
-    </section>
-  )
+  if (activeCategory === null) {
+    return (
+      <section className='CardContainer'> 
+        <p>welcome</p>
+      </section>
+    ) 
+  }
+
+  if (activeCategory=== 'people') {
+    return (
+      <section className='CardContainer'> 
+        {peopleCards}
+      </section>
+    )
+  }
+
+  if (activeCategory === 'vehicles') {
+    return (
+      <section className='CardContainer'>
+        vehicles
+      </section>
+    )
+  }
+
+  if (activeCategory === 'favorites') {
+    return (
+      <section className='CardContainer'>
+        favorites
+      </section>
+    )
+  }
 }
 
 export default CardContainer;

@@ -42,7 +42,7 @@ class App extends Component {
       console.log('peep from loc');
       this.setState({people: JSON.parse(localStorage.getItem("people"))})
     }
-    this.showCards()
+    this.setState({activeCategory: "people"})
   }
 
   setPlanetState = async () => {
@@ -54,7 +54,7 @@ class App extends Component {
       console.log("from loc");
       this.setState({planets: JSON.parse(localStorage.getItem('planets'))})
     }
-    this.showCards()
+    this.setState({activeCategory: "planets"})
   }
 
   setVehicleState = async () => {
@@ -65,7 +65,9 @@ class App extends Component {
     } else {
       this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))})
     }
-    this.showCards()
+
+    this.setState({activeCategory: "vehicles"})
+
   }
 
   setFavoriteState = (cardName, category) => {
@@ -75,12 +77,11 @@ class App extends Component {
       return card.name === cardName;
     });
     const favoriteCards = [...favorites, target];
-    this.setState({favorites: favoriteCards});
-    this.showCards()
+    this.setState({favorites: favoriteCards });
   }
 
-  showCards = () => {
-    console.log("cards");
+  setCategory = () => {
+    this.setState({activeCategory: "favorites"})
   }
 
   render() {
@@ -97,9 +98,15 @@ class App extends Component {
           <Button 
             name="vehicles"
             resourceCall={this.setVehicleState}/>
-          <button className="Button">{this.state.favorites.length} Favorites</button>
+          <button 
+            onClick={this.setCategory}
+            className="Button">
+            
+            {this.state.favorites.length} Favorites
+          </button>
         </nav>
         <CardContainer
+          activeCategory={this.state.activeCategory}
           setFavorite={this.setFavoriteState}
           favorites={this.state.favorites}
           people={this.state.people}

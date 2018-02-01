@@ -2,7 +2,7 @@ import React from 'react';
 //import './PlanetCard.css';
 
 const PlanetCard = ({name, climate, terrain, population, residents, setFavorite, className}) => {
-  console.log(name);
+  //console.log(name);
   return (
     <article className='Card'> 
       <header>
