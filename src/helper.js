@@ -15,9 +15,13 @@ export default class SwapiCleaner {
     };
   }
 
+  fetchAndJson = async(url) => {
+    const promiseResponse = await fetch(url);
+    return await promiseResponse.json()
+  }
+
   getVehicles = async() => {
-    const vehiclesArray = await fetch(`${this.root}vehicles`)
-      const arrayResults = await vehiclesArray.json();
+    const arrayResults = await this.fetchAndJson(`${this.root}vehicles`)
       const cleanedVehicles = await arrayResults.results.map( vehicle => {
         const {name, vehicle_class, passengers, model } = vehicle;
         return ({name, vehicle_class, passengers, model, favorite: false})
@@ -26,36 +30,32 @@ export default class SwapiCleaner {
   }
 
   getPlanets = async() => {
-    const planetsArray = await fetch(`${this.root}planets`)
-      const arrayResults = await planetsArray.json();
-      const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
-      return cleanedPlanets
+    const arrayResults = await this.fetchAndJson(`${this.root}planets`)
+    const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
+    return cleanedPlanets
   }
 
   cleanPlanet = async(planetArray) => {
     planetArray = planetArray.splice(0,3);
     const unresolvedPlanets = await planetArray.map(async (planet) => {
       const {name, terrain, population, climate, residents } = planet;
-      const cleanedResidents = await this.cleanResidents(residents)
-      return ({name, terrain, population, climate, residents: cleanedResidents, favorite: false})
+      const cleanedResidents = await this.cleanResidents(residents);
+      return ({name, terrain, population, climate, residents: cleanedResidents, favorite: false});
     })
     return Promise.all(unresolvedPlanets);
   }
 
   cleanResidents = async(residents) => {
     const unresolvedResidents = await residents.map(async (residentUrl) => {
-      const resident = await fetch(residentUrl)
-      const residentObject = await resident.json()
+      const residentObject = await this.fetchAndJson(residentUrl);
       const {name} = residentObject;
       return (name)
     })
     return Promise.all(unresolvedResidents);
   }
 
-
   getPeople = async() => {
-    const peopleArray =  await fetch(`${this.root}people`)
-      const arrayResults = await peopleArray.json();
+      const arrayResults = await this.fetchAndJson(`${this.root}people`)
       const cleanedHomeworld = await this.cleanHomeworld(arrayResults.results)
       const cleanedSpecies = await this.cleanSpecies(cleanedHomeworld);
       return cleanedSpecies;
@@ -64,8 +64,7 @@ export default class SwapiCleaner {
   cleanHomeworld = async(peopleArray) => {
     peopleArray = peopleArray.splice(0,3);
     const unresolvedPeople = await peopleArray.map(async (person) => {
-      const homeworld = await fetch(person.homeworld)
-      const homeworldObject = await homeworld.json()
+      const homeworldObject = await this.fetchAndJson(person.homeworld)
       const { name, population } = homeworldObject;
       return ({...person, homeworld: name, population })      
     })
@@ -74,8 +73,7 @@ export default class SwapiCleaner {
 
   cleanSpecies = async(peopleArray) => {
     const unresolvedPeople = await peopleArray.map(async (person) => {
-      const speci = await fetch(person.species)
-      const species = await speci.json()
+      const species = await this.fetchAndJson(person.species)
       const {name} = species;
       const { homeworld, population } = person;
       return ({
