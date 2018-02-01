@@ -81,7 +81,10 @@ class App extends Component {
             name="vehicles"
             resourceCall={this.setVehicleState}/>
         </nav>
-        <CardContainer />
+        <CardContainer
+          people={this.state.people}
+          planets={this.state.planets}
+          vehicles={this.state.vehicles} />
       </div>
     );
   }

@@ -2,13 +2,26 @@ import React from 'react';
 import Card from '../Card/Card'
 import './CardContainer.css';
 
-const CardContainer = (props) => {
+const CardContainer = ({people, planets, vehicles}) => {
+  console.log(people, planets, vehicles);
+
+  const peopleCards = people.map((person, index) => 
+    <Card 
+      name={person.name}
+      species={person.species}
+      homeworld={person.homeworld}
+      population={person.population}
+      key={index} />
+  )
+
   return (
     <section className='CardContainer'> 
-    {!this.props &&
+    {people.length === 0 &&
       <p>welcome</p>
     }
-    <Card />
+    {peopleCards}
+
+
     </section>
   )
 }
