@@ -82,7 +82,7 @@ export default class SwapiCleaner {
         population,
         species: name,
         favorite: false,
-      })        
+      })
     })
     return Promise.all(unresolvedPeople)
   }
