@@ -1,12 +1,12 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({name, species, homeworld, population}) => {
+const Card = ({name, species, homeworld, population, setFavorite}) => {
   return (
     <article className='Card'> 
       <header>
         <h1 className="name">{name}</h1>
-        <i className="favorite">x</i>
+        <button onClick={setFavorite}className="favorite">x</button>
       </header>
       <ul className="categories">
         <li>Homeworld: {homeworld}</li>

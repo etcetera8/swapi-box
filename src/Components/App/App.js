@@ -66,6 +66,10 @@ class App extends Component {
     }
   }
 
+  setFavoriteState = () => {
+    console.log('favorite clicked')
+  }
+
   render() {
     return (
       <div className="App">
@@ -82,6 +86,8 @@ class App extends Component {
             resourceCall={this.setVehicleState}/>
         </nav>
         <CardContainer
+          setFavorite={this.setFavoriteState}
+          favorites={this.state.favorites}
           people={this.state.people}
           planets={this.state.planets}
           vehicles={this.state.vehicles} />

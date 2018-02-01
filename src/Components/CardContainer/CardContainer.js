@@ -2,11 +2,12 @@ import React from 'react';
 import Card from '../Card/Card'
 import './CardContainer.css';
 
-const CardContainer = ({people, planets, vehicles}) => {
-  console.log(people, planets, vehicles);
+const CardContainer = ({people, planets, vehicles, favorites, setFavorite}) => {
+  console.log(favorites, setFavorite);
 
   const peopleCards = people.map((person, index) => 
     <Card 
+      setFavorite={setFavorite}
       name={person.name}
       species={person.species}
       homeworld={person.homeworld}
