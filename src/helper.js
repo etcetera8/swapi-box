@@ -15,6 +15,36 @@ export default class SwapiCleaner {
     };
   }
 
+  getPlanets = async() => {
+    const planetsArray = await fetch(`${this.root}planets`)
+      const arrayResults = await planetsArray.json();
+      const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
+      console.log(cleanedPlanets)
+      return cleanedPlanets
+  }
+
+  cleanPlanet = async(planetArray) => {
+    planetArray = planetArray.splice(0,3);
+    const unresolvedPlanets = await planetArray.map(async (planet) => {
+      const {name, terrain, population, climate, residents } = planet;
+      const cleanedResidents = await this.cleanResidents(residents)
+      return ({name, terrain, population, climate, residents: cleanedResidents})
+    })
+    console.log(unresolvedPlanets);
+    return Promise.all(unresolvedPlanets);
+  }
+
+  cleanResidents = async(residents) => {
+    const unresolvedResidents = await residents.map(async (residentUrl) => {
+      const resident = await fetch(residentUrl)
+      const residentObject = await resident.json()
+      const {name} = residentObject;
+      return (name)
+    })
+    return Promise.all(unresolvedResidents);
+  }
+
+
   getPeople = async() => {
     const peopleArray =  await fetch(`${this.root}people`)
       const arrayResults = await peopleArray.json();

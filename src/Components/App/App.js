@@ -36,8 +36,14 @@ class App extends Component {
 
   setPeopleState = async () => {
     const people = await this.cleaner.getPeople()
-    console.log(people);
     this.setState({people})
+  }
+
+  setPlanetState = async () => {
+    const planets = await this.cleaner.getPlanets()
+    
+    console.log(planets);
+    //this.setState({planets})
   }
 
   render() {
@@ -50,7 +56,7 @@ class App extends Component {
             resourceCall={this.setPeopleState}/>
           <Button 
             name="planets"
-            resourceCall={this.resourceCall}/>
+            resourceCall={this.setPlanetState}/>
           <Button 
             name="vehicles"
             resourceCall={this.resourceCall}/>
