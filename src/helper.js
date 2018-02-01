@@ -18,16 +18,12 @@ export default class SwapiCleaner {
   getVehicles = async() => {
     const vehiclesArray = await fetch(`${this.root}vehicles`)
       const arrayResults = await vehiclesArray.json();
-
       const cleanedVehicles = await arrayResults.results.map( vehicle => {
-        //console.log(vehicle);
         const {name, vehicle_class, passengers, model } = vehicle;
-        console.log(name, vehicle_class, passengers, model);
-        return ({name, vehicle_class, passengers, model})
+        return ({name, vehicle_class, passengers, model, favorite: false})
       })
       return Promise.all(cleanedVehicles);
   }
-
 
   getPlanets = async() => {
     const planetsArray = await fetch(`${this.root}planets`)
@@ -41,7 +37,7 @@ export default class SwapiCleaner {
     const unresolvedPlanets = await planetArray.map(async (planet) => {
       const {name, terrain, population, climate, residents } = planet;
       const cleanedResidents = await this.cleanResidents(residents)
-      return ({name, terrain, population, climate, residents: cleanedResidents})
+      return ({name, terrain, population, climate, residents: cleanedResidents, favorite: false})
     })
     return Promise.all(unresolvedPlanets);
   }

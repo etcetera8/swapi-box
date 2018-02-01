@@ -46,7 +46,6 @@ class App extends Component {
 
   setVehicleState = async () => {
     const vehicles = await this.cleaner.getVehicles()
-    console.log(vehicles);
     this.setState({vehicles})
   }
 
