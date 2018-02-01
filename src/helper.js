@@ -15,6 +15,20 @@ export default class SwapiCleaner {
     };
   }
 
+  getVehicles = async() => {
+    const vehiclesArray = await fetch(`${this.root}vehicles`)
+      const arrayResults = await vehiclesArray.json();
+
+      const cleanedVehicles = await arrayResults.results.map( vehicle => {
+        //console.log(vehicle);
+        const {name, vehicle_class, passengers, model } = vehicle;
+        console.log(name, vehicle_class, passengers, model);
+        return ({name, vehicle_class, passengers, model})
+      })
+      return Promise.all(cleanedVehicles);
+  }
+
+
   getPlanets = async() => {
     const planetsArray = await fetch(`${this.root}planets`)
       const arrayResults = await planetsArray.json();
@@ -79,11 +93,11 @@ export default class SwapiCleaner {
     return Promise.all(unresolvedPeople)
   }
 
-  randomMovieNumber() {
+  randomMovieNumber = () => {
     return Math.floor(Math.random() * 7 + 1)
   }
 
-  romanize(num) {
+  romanize = (num) => {
     let romNumeral = '';
     switch (num) {
       case 1:

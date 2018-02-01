@@ -22,7 +22,7 @@ class App extends Component {
 
   componentDidMount() {
     this.cleaner = new Cleaner();
-    //this.apiCall('films')
+    this.apiCall('films')
   }
 
   apiCall(resource) {
@@ -44,6 +44,12 @@ class App extends Component {
     this.setState({planets})
   }
 
+  setVehicleState = async () => {
+    const vehicles = await this.cleaner.getVehicles()
+    console.log(vehicles);
+    this.setState({vehicles})
+  }
+
   render() {
     return (
       <div className="App">
@@ -57,7 +63,7 @@ class App extends Component {
             resourceCall={this.setPlanetState}/>
           <Button 
             name="vehicles"
-            resourceCall={this.resourceCall}/>
+            resourceCall={this.setVehicleState}/>
         </nav>
         <CardContainer />
       </div>
