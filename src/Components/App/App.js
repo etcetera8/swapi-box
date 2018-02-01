@@ -41,6 +41,7 @@ class App extends Component {
       console.log('peep from loc');
       this.setState({people: JSON.parse(localStorage.getItem("people"))})
     }
+    this.showCards()
   }
 
   setPlanetState = async () => {
@@ -52,6 +53,7 @@ class App extends Component {
       console.log("from loc");
       this.setState({planets: JSON.parse(localStorage.getItem('planets'))})
     }
+    this.showCards()
   }
 
   setVehicleState = async () => {
@@ -62,6 +64,7 @@ class App extends Component {
     } else {
       this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))})
     }
+    this.showCards()
   }
 
   setFavoriteState = (cardName, category) => {
@@ -72,6 +75,11 @@ class App extends Component {
     });
     const favoriteCards = [...favorites, target];
     this.setState({favorites: favoriteCards});
+    this.showCards()
+  }
+
+  showCards = () => {
+    console.log("cards");
   }
 
   render() {
