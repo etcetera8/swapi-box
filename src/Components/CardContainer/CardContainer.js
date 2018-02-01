@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../Card/Card'
+import PlanetCard from '../PlanetCard/PlanetCard'
 import './CardContainer.css';
 
 const CardContainer = ({people, planets, vehicles, favorites, setFavorite}) => {
@@ -19,12 +20,29 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite}) => {
       key={index} />
   )
 
+  console.log(peopleCards)
+
+  const planetCards = planets.map((planet, index) => {
+    return <PlanetCard
+      className={favorited(planet.favorite)}
+      setFavorite={setFavorite}
+      name={planet.name}
+      climate={planet.climate}
+      terrain={planet.terrain}
+      population={planet.population}
+      residents={planet.residents}
+      key={index}
+    />
+  })
+  console.log(planetCards);
+
   return (
     <section className='CardContainer'> 
     {people.length === 0 &&
       <p>welcome</p>
     }
     {peopleCards}
+    {planetCards}
     </section>
   )
 }
