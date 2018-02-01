@@ -1,8 +1,13 @@
 import React from 'react';
-//import './PlanetCard.css';
 
 const PlanetCard = ({name, climate, terrain, population, residents, setFavorite, className}) => {
-  console.log(setFavorite);
+  let resString = ''
+  if (residents.length === 0) {
+    resString = 'N/A'
+  } else {
+    resString = residents.join(", ")
+  }
+
   return (
     <article className='Card'> 
       <header>
@@ -13,6 +18,7 @@ const PlanetCard = ({name, climate, terrain, population, residents, setFavorite,
         <li>Climate {climate}</li>
         <li>Terrain: {terrain}</li>
         <li>Population: {population}</li>
+        <li>Residents: {resString}</li>
       </ul> 
     </article>
   )
