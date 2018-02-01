@@ -24,7 +24,7 @@ export default class SwapiCleaner {
     const arrayResults = await this.fetchAndJson(`${this.root}vehicles`)
       const cleanedVehicles = await arrayResults.results.map( vehicle => {
         const {name, vehicle_class, passengers, model } = vehicle;
-        return ({name, vehicle_class, passengers, model, favorite: false})
+        return ({name, vehicle_class, passengers, model, favorite: false, category: 'vehicles'})
       })
       return Promise.all(cleanedVehicles);
   }
@@ -40,7 +40,7 @@ export default class SwapiCleaner {
     const unresolvedPlanets = await planetArray.map(async (planet) => {
       const {name, terrain, population, climate, residents } = planet;
       const cleanedResidents = await this.cleanResidents(residents);
-      return ({name, terrain, population, climate, residents: cleanedResidents, favorite: false});
+      return ({name, terrain, population, climate, residents: cleanedResidents, favorite: false, category: 'planets'});
     })
     return Promise.all(unresolvedPlanets);
   }
@@ -82,6 +82,7 @@ export default class SwapiCleaner {
         population,
         species: name,
         favorite: false,
+        category: 'people'
       })
     })
     return Promise.all(unresolvedPeople)

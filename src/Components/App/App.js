@@ -13,7 +13,8 @@ class App extends Component {
       people: [],
       planets: [],
       vehicles: [],
-      favorites: []
+      favorites: [],
+      activeCategory: null
     }
     this.cleaner = new Cleaner()
   }
