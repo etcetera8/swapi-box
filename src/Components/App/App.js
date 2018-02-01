@@ -41,9 +41,7 @@ class App extends Component {
 
   setPlanetState = async () => {
     const planets = await this.cleaner.getPlanets()
-    
-    console.log(planets);
-    //this.setState({planets})
+    this.setState({planets})
   }
 
   render() {

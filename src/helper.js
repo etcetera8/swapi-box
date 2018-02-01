@@ -19,7 +19,6 @@ export default class SwapiCleaner {
     const planetsArray = await fetch(`${this.root}planets`)
       const arrayResults = await planetsArray.json();
       const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
-      console.log(cleanedPlanets)
       return cleanedPlanets
   }
 
@@ -30,7 +29,6 @@ export default class SwapiCleaner {
       const cleanedResidents = await this.cleanResidents(residents)
       return ({name, terrain, population, climate, residents: cleanedResidents})
     })
-    console.log(unresolvedPlanets);
     return Promise.all(unresolvedPlanets);
   }
 
