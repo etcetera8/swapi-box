@@ -68,9 +68,9 @@ class App extends Component {
     const {favorites} = this.state;
     const target = this.state[category].find(card => { 
       card.name === cardName ? card.favorite = true : null;
-      return card.name === cardName
+      return card.name === cardName;
     });
-    const favoriteCards = [...this.state.favorites, target];
+    const favoriteCards = [...favorites, target];
     this.setState({favorites: favoriteCards});
   }
 
