@@ -3,7 +3,6 @@ import Card from '../Card/Card'
 import './CardContainer.css';
 
 const CardContainer = ({people, planets, vehicles, favorites, setFavorite}) => {
-  console.log(favorites, setFavorite);
 
   const peopleCards = people.map((person, index) => 
     <Card 
@@ -21,8 +20,6 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite}) => {
       <p>welcome</p>
     }
     {peopleCards}
-
-
     </section>
   )
 }

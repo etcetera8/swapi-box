@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-//import Header from '../Header/Header';
 import ScrollContainer from '../ScrollContainer/ScrollContainer';
 import CardContainer from '../CardContainer/CardContainer';
 import Button from '../Button/Button';
 import Cleaner from '../../helper';
 import './App.css';
-
 
 class App extends Component {
   constructor(props) {
@@ -66,8 +64,14 @@ class App extends Component {
     }
   }
 
-  setFavoriteState = () => {
-    console.log('favorite clicked')
+  setFavoriteState = (cardName, category) => {
+    const {favorites} = this.state;
+    const target = this.state[category].find(card => { 
+      card.name === cardName ? card.favorite = true : null;
+      return card.name === cardName
+    });
+    const favoriteCards = [...this.state.favorites, target];
+    this.setState({favorites: favoriteCards});
   }
 
   render() {
@@ -84,6 +88,7 @@ class App extends Component {
           <Button 
             name="vehicles"
             resourceCall={this.setVehicleState}/>
+          <button className="Button">{this.state.favorites.length} Favorites</button>
         </nav>
         <CardContainer
           setFavorite={this.setFavoriteState}

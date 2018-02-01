@@ -6,7 +6,7 @@ const Card = ({name, species, homeworld, population, setFavorite}) => {
     <article className='Card'> 
       <header>
         <h1 className="name">{name}</h1>
-        <button onClick={setFavorite}className="favorite">x</button>
+        <button onClick={() => setFavorite(name, 'people')} className="favorite">x</button>
       </header>
       <ul className="categories">
         <li>Homeworld: {homeworld}</li>
