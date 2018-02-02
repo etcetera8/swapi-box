@@ -8,9 +8,9 @@
   color: yellow;
 }
 
-.activeVehicle, 
-.activePeople,
-.activePlanet,
-.activeFavorites {
+.activevehicles, 
+.activepeople,
+.activeplanets,
+.activefavorites {
   background: red;
 }

@@ -83,24 +83,13 @@ class App extends Component {
     this.setState({activeCategory: "favorites"})
   }
 
-  render() {
-    let activeVehicle = ''
-    let activePeople = ''
-    let activePlanet = ''
-    let activeFavorites = ''
-    if (this.state.activeCategory === 'vehicles') {
-      activeVehicle='activeVehicle'
+  activeStatus = (category) => {
+    if (this.state.activeCategory === category) {
+      return `active${category}`;
     } 
-    if (this.state.activeCategory === 'people'){
-      activePeople="activePeople"
-    }
-    if (this.state.activeCategory === "planets") {
-      activePlanet = 'activePlanet'
-    }
-    if (this.state.activeCategory === "favorites") {
-      activeFavorites = 'activeFavorites'
-    }
+  }
 
+  render() {
     return (
       <div className="App">
         <ScrollContainer movieData={this.state.scrollText}/>
@@ -108,18 +97,20 @@ class App extends Component {
           <Button
             name="people"
             resourceCall={this.setPeopleState}
-            className={activePeople}/>
+            className={this.activeStatus('people')}
+            />
           <Button 
             name="planets"
             resourceCall={this.setPlanetState}
-            className={activePlanet}/>
+            className={this.activeStatus('planets')}
+            />
           <Button 
             name="vehicles"
             resourceCall={this.setVehicleState}
-            className={activeVehicle}/>
+            className={this.activeStatus('vehicles')}/>
           <button 
             onClick={this.setCategory}
-            className={`Button ${activeFavorites}`}
+            className={`Button ${this.activeStatus('favorites')}`}
             >
             
             {this.state.favorites.length} Favorites
