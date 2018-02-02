@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Button.css';
 
 const Button = ({ name, resourceCall, className }) => {
@@ -10,5 +11,11 @@ const Button = ({ name, resourceCall, className }) => {
     </button>
   )
 }
+
+Button.propTypes = {
+  name: PropTypes.string.isRequired,
+  resourceCall: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
+};
 
 export default Button;

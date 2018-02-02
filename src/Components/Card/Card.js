@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Card.css';
 
 const Card = ({name, species, homeworld, population, setFavorite, className}) => {
@@ -16,5 +17,14 @@ const Card = ({name, species, homeworld, population, setFavorite, className}) =>
     </article>
   )
 }
+
+Card.propTypes = {
+  name: PropTypes.string.isRequired,
+  species: PropTypes.string.isRequired,
+  homeworld: PropTypes.string.isRequired,
+  population: PropTypes.string.isRequired,
+  setFavorite: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired
+};
 
 export default Card;
