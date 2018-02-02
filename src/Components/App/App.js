@@ -75,8 +75,21 @@ class App extends Component {
       card.name === cardName ? card.favorite = true : null;
       return card.name === cardName;
     });
-    const favoriteCards = [...favorites, target];
-    this.setState({favorites: favoriteCards });
+
+    const filtered = this.state.favorites.filter(card => {
+      return card.name !== target.name
+    })
+
+    if (favorites.includes(target)) {
+      console.log("found", target)
+      
+      this.setState({favorites: filtered})
+    } else {
+      const favoriteCards = [...favorites, target];
+
+      this.setState({favorites: favoriteCards });
+    }
+
   }
 
   setCategory = () => {
