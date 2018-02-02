@@ -5,7 +5,7 @@ import VehicleCard from '../VehicleCard/VehicleCard';
 import './CardContainer.css';
 
 const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activeCategory}) => {
-  console.log('favorties' ,favorites);
+
   const favorited = (favorited) => {
     const match = favorites.find(card => card.favorite === favorited)
     return match ? "favorited" : "";
@@ -64,7 +64,8 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         name={card.name}
         model={card.model}
         passengers={card.passengers}
-        vehicle_class={card.vehicle_class}     
+        vehicle_class={card.vehicle_class}
+        key={index}    
       />
     }
     else if (card.category === "planets") {

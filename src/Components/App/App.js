@@ -69,8 +69,8 @@ class App extends Component {
   }
 
   setFavoriteState = (cardName, category) => {
-    
     const {favorites} = this.state;
+
     const target = this.state[category].find(card => { 
       card.name === cardName ? card.favorite = true : null;
       return card.name === cardName;
@@ -84,9 +84,8 @@ class App extends Component {
   }
 
   activeStatus = (category) => {
-    if (this.state.activeCategory === category) {
-      return `active${category}`;
-    } 
+    return this.state.activeCategory === category ?  
+      `active${category}` : ""
   }
 
   render() {
@@ -112,7 +111,6 @@ class App extends Component {
             onClick={this.setCategory}
             className={`Button ${this.activeStatus('favorites')}`}
             >
-            
             {this.state.favorites.length} Favorites
           </button>
         </nav>
