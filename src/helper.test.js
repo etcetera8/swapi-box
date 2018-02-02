@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 //import { shallow, mount } from 'enzyme';
 //import Adapter from 'enzyme-adapter-react-16';
 import SwapiCleaner from './helper.js';
-import mockData from './mockData.js';
+//import mockData from './mockData.js';
 describe('Cleaner function', () => {
-  const cleaner = new SwapiCleaner(mockData);
+  const cleaner = new SwapiCleaner();
 
   it('cleaner has data in an object', ()=> {
     console.log(Object.keys(cleaner.responseData));

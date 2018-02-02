@@ -42,6 +42,7 @@ class App extends Component {
       this.setState({people: JSON.parse(localStorage.getItem("people"))})
     }
     this.setState({activeCategory: "people"})
+
   }
 
   setPlanetState = async () => {
@@ -75,7 +76,7 @@ class App extends Component {
       card.name === cardName ? card.favorite = true : null;
       return card.name === cardName;
     });
-
+    
     const filtered = this.state.favorites.filter(card => {
       return card.name !== target.name
     })
@@ -83,7 +84,7 @@ class App extends Component {
     if (favorites.includes(target)) {
       target.favorite= false;
       console.log(this.state[category].includes(target))
-      this.setState({favorites: filtered})
+      this.setState({favorites: filtered })
     } else {
       const favoriteCards = [...favorites, target];
 
