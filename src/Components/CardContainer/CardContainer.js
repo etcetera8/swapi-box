@@ -9,7 +9,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
 
   const favorited = (favorited) => {
     const match = favorites.find(card => card.favorite === favorited)
-    return match ? "favorited" : "";
+      return match ? "favorited" : "";
   }
 
   const peopleCards = people.map((person, index) => 
@@ -23,8 +23,8 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       key={index} />
   )
 
-  const planetCards = planets.map((planet, index) => {
-    return <PlanetCard
+  const planetCards = planets.map((planet, index) =>
+    <PlanetCard
       className={favorited(planet.favorite)}
       setFavorite={setFavorite}
       name={planet.name}
@@ -34,10 +34,10 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       residents={planet.residents}
       key={index}
     />
-  })
+  )
 
-  const vehicleCards = vehicles.map((vehicle, index) => {
-    return <VehicleCard 
+  const vehicleCards = vehicles.map((vehicle, index) =>
+   <VehicleCard 
       className={favorited(vehicle.favorite)}
       setFavorite={setFavorite}
       name={vehicle.name}
@@ -46,7 +46,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       vehicle_class={vehicle.vehicle_class}
       key={index}     
     />
-  })
+  )
 
   const favoriteCards = favorites.map((card, index) => {
     if (card.category === 'people') {
