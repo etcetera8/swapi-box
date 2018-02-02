@@ -126,7 +126,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
     )
   }
 }
-//people, planets, vehicles, favorites, setFavorite, activeCategory
+
 CardContainer.propTypes = {
   people: PropTypes.array.isRequired,
   planets: PropTypes.array.isRequired,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PlanetCard = ({name, climate, terrain, population, residents, setFavorite, className}) => {
   let resString = ''
@@ -22,6 +23,16 @@ const PlanetCard = ({name, climate, terrain, population, residents, setFavorite,
       </ul> 
     </article>
   )
+}
+
+PlanetCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  climate: PropTypes.string.isRequired,
+  terrain: PropTypes.string.isRequired,
+  population: PropTypes.string.isRequired,
+  residents: PropTypes.array.isRequired,
+  setFavorite: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired
 }
 
 export default PlanetCard;
