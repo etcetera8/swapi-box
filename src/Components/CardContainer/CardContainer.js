@@ -37,7 +37,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
 
   const vehicleCards = vehicles.map((vehicle, index) => {
     return <VehicleCard 
-      className={favorited(vehicle.card)}
+      className={favorited(vehicle.favorite)}
       setFavorite={setFavorite}
       name={vehicle.name}
       model={vehicle.model}
