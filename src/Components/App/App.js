@@ -84,22 +84,43 @@ class App extends Component {
   }
 
   render() {
+    let activeVehicle = ''
+    let activePeople = ''
+    let activePlanet = ''
+    let activeFavorites = ''
+    if (this.state.activeCategory === 'vehicles') {
+      activeVehicle='activeVehicle'
+    } 
+    if (this.state.activeCategory === 'people'){
+      activePeople="activePeople"
+    }
+    if (this.state.activeCategory === "planets") {
+      activePlanet = 'activePlanet'
+    }
+    if (this.state.activeCategory === "favorites") {
+      activeFavorites = 'activeFavorites'
+    }
+
     return (
       <div className="App">
         <ScrollContainer movieData={this.state.scrollText}/>
         <nav className="button-container">
-          <Button 
+          <Button
             name="people"
-            resourceCall={this.setPeopleState}/>
+            resourceCall={this.setPeopleState}
+            className={activePeople}/>
           <Button 
             name="planets"
-            resourceCall={this.setPlanetState}/>
+            resourceCall={this.setPlanetState}
+            className={activePlanet}/>
           <Button 
             name="vehicles"
-            resourceCall={this.setVehicleState}/>
+            resourceCall={this.setVehicleState}
+            className={activeVehicle}/>
           <button 
             onClick={this.setCategory}
-            className="Button">
+            className={`Button ${activeFavorites}`}
+            >
             
             {this.state.favorites.length} Favorites
           </button>

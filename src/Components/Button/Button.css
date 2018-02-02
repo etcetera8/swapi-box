@@ -7,3 +7,10 @@
   background: none;
   color: yellow;
 }
+
+.activeVehicle, 
+.activePeople,
+.activePlanet,
+.activeFavorites {
+  background: red;
+}
