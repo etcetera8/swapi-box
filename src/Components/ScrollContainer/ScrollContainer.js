@@ -1,5 +1,6 @@
 import React from 'react';
-import './ScrollContainer.css'
+import PropTypes from 'prop-types';
+import './ScrollContainer.css';
 
 const ScrollContainer = ( {movieData} ) => {
   const {scrollText, episode, title, releaseDate} = movieData;
@@ -17,5 +18,14 @@ const ScrollContainer = ( {movieData} ) => {
     </section>
   )
 }
+
+ScrollContainer.propTypes = {
+  movieData: PropTypes.shape({
+    scrollText: PropTypes.string,
+    episode: PropTypes.string,
+    title: PropTypes.string,
+    releaseDate: PropTypes.string
+  })
+};
 
 export default ScrollContainer;

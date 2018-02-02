@@ -21,7 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     this.cleaner = new Cleaner();
-    //this.apiCall('films')
+    this.apiCall('films')
   }
 
   apiCall(resource) {
