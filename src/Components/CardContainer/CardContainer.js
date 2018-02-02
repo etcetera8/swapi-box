@@ -42,7 +42,8 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       name={vehicle.name}
       model={vehicle.model}
       passengers={vehicle.passengers}
-      vehicle_class={vehicle.vehicle_class}     
+      vehicle_class={vehicle.vehicle_class}
+      key={index}     
     />
   })
 
@@ -66,9 +67,19 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         vehicle_class={card.vehicle_class}     
       />
     }
-  })
-
-  console.log(favoriteCards);
+    else if (card.category === "planets") {
+      return <PlanetCard
+        className={favorited(card.favorite)}
+        setFavorite={setFavorite}
+        name={card.name}
+        climate={card.climate}
+        terrain={card.terrain}
+        population={card.population}
+        residents={card.residents}
+        key={index}
+      />
+      }
+    })
 
   if (activeCategory==='planets') {
     return (
@@ -105,6 +116,9 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
   if (activeCategory === 'favorites') {
     return (
       <section className='CardContainer'>
+      { favoriteCards.length === 0 &&
+        <p>No favorites selected</p>
+      }
         {favoriteCards}
       </section>
     )
