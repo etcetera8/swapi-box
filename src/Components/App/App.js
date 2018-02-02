@@ -81,15 +81,14 @@ class App extends Component {
     })
 
     if (favorites.includes(target)) {
-      console.log("found", target)
-      
+      target.favorite= false;
+      console.log(this.state[category].includes(target))
       this.setState({favorites: filtered})
     } else {
       const favoriteCards = [...favorites, target];
 
       this.setState({favorites: favoriteCards });
     }
-
   }
 
   setCategory = () => {
