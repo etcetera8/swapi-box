@@ -3,6 +3,7 @@ import Card from '../Card/Card';
 import PlanetCard from '../PlanetCard/PlanetCard';
 import VehicleCard from '../VehicleCard/VehicleCard';
 import './CardContainer.css';
+import PropTypes from 'prop-types';
 
 const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activeCategory}) => {
 
@@ -125,5 +126,14 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
     )
   }
 }
+//people, planets, vehicles, favorites, setFavorite, activeCategory
+CardContainer.propTypes = {
+  people: PropTypes.array.isRequired,
+  planets: PropTypes.array.isRequired,
+  vehicles: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
+  setFavorite: PropTypes.func.isRequired,
+  activeCategory: PropTypes.string
+};
 
 export default CardContainer;
