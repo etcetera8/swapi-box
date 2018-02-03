@@ -7,12 +7,12 @@ const VehicleCard = ({name, model, passengers, vehicle_class, setFavorite, class
     <article className='Card'> 
       <header>
         <h1 className="name">{name}</h1>
-        <button onClick={() => setFavorite(name, 'vehicles')} className={`favorite ${className}`}>x</button>
+        <button onClick={() => setFavorite(name, 'vehicles')} className={`favorite ${className}`}>★</button>
       </header>
       <ul className="categories">
-       <li>Model: {model}</li>
-       <li>Vehicle Class: {vehicle_class}</li>
-       <li>Passeners: {passengers}</li>
+       <li><span className='key'>Model:</span> {model}</li>
+       <li><span className='key'>Vehicle Class:</span> {vehicle_class}</li>
+       <li><span className='key'>Passeners:</span> {passengers}</li>
       </ul> 
     </article>
   )

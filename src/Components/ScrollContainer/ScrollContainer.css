@@ -17,14 +17,14 @@
 
 .swapi-title {
   font-size: 1.5em;
-  margin: 150px 50px 0 50px;
 }
 
 .crawl {
   position: relative;
-  top: -100px;
+  top: -50px;
   transform-origin: 50% 100%; 
-  animation: crawl 55s linear;
+  animation: crawl 25s linear;
+  text-align: center;
 }
 
 @keyframes crawl {
@@ -34,7 +34,7 @@
   }
 
   100% {
-    top: -6000px;
+    top: -5250px;
     transform: rotateX(25deg) translateZ(-2500px);
   }
 

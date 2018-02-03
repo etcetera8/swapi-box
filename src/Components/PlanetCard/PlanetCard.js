@@ -13,13 +13,13 @@ const PlanetCard = ({name, climate, terrain, population, residents, setFavorite,
     <article className='Card'> 
       <header>
         <h1 className="name">{name}</h1>
-        <button onClick={() => setFavorite(name, 'planets')} className={`favorite ${className}`}>x</button>
+        <button onClick={() => setFavorite(name, 'planets')} className={`favorite ${className}`}>★</button>
       </header>
       <ul className="categories">
-        <li>Climate {climate}</li>
-        <li>Terrain: {terrain}</li>
-        <li>Population: {population}</li>
-        <li>Residents: {resString}</li>
+        <li><span className='key'>Climate:</span>{climate}</li>
+        <li><span className='key'>Terrain:</span>  {terrain}</li>
+        <li><span className='key'>Population:</span> {population}</li>
+        <li><span className='key'>Residents:</span> {resString}</li>
       </ul> 
     </article>
   )
