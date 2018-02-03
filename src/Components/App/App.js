@@ -20,8 +20,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.cleaner = new Cleaner();
-    //this.apiCall('films')
+    try {
+     this.apiCall('films');
+    }
+    catch(err) {
+      return 'err'
+    }
   }
 
   apiCall(resource) {
@@ -42,7 +46,6 @@ class App extends Component {
       this.setState({people: JSON.parse(localStorage.getItem("people"))})
     }
     this.setState({activeCategory: "people"})
-
   }
 
   setPlanetState = async () => {
@@ -82,12 +85,11 @@ class App extends Component {
     })
 
     if (favorites.includes(target)) {
-      target.favorite= false;
+      target.favorite = false;
       console.log(this.state[category].includes(target))
       this.setState({favorites: filtered })
     } else {
       const favoriteCards = [...favorites, target];
-
       this.setState({favorites: favoriteCards });
     }
   }
