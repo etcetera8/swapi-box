@@ -22,7 +22,7 @@ class App extends Component {
 
   componentDidMount() {
     try {
-     this.randomMovieScroll('films');
+     //this.randomMovieScroll('films');
     }
     catch(err) {
       return 'err'
@@ -77,14 +77,10 @@ class App extends Component {
   setFavoriteState = (cardName, category) => {
     const {favorites} = this.state;
 
-    const target = this.state[category].find(card => { 
-      card.name === cardName ? card.favorite = true : null;
-      return card.name === cardName;
-    });
+    const target = this.state[category].find(card => 
+      card.name === cardName ? card.favorite = true : null);
     
-    const filtered = this.state.favorites.filter(card => {
-      return card.name !== target.name
-    })
+    const filtered = this.state.favorites.filter(card =>card.name !== target.name);
 
     if (favorites.includes(target)) {
       target.favorite = false;
