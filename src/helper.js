@@ -29,8 +29,9 @@ export default class SwapiCleaner {
             category: 'vehicles'})
         })
       return Promise.all(cleanedVehicles);
-    } catch(err) {
-      return "Error";
+    } 
+    catch(err) {
+      return err;
     }
   }
 

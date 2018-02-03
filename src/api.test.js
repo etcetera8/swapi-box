@@ -27,7 +27,7 @@ describe('api', () => {
       window.fetch = jest.fn().mockImplementation(() => 
       Promise.reject({
         status: 404,
-        json: ()=> Promise.reject("Error")
+        json: () => Promise.reject("Error")
       }))
       const error = await fetchAndJson();
 

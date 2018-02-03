@@ -31,10 +31,18 @@ describe('Cleaner function', () => {
     expect(returnedObj).toEqual({"episode": "II", "releaseDate": "02-07-2004", "scrollText": "There is unrest in the Galactic", "title": "Attack of the Clones"});
   })
 
-  it("the getVehicles function shoud return a cleaned vehicle Object", async () => {
-    //const returnedObj = await cleaner.getVehicles();
+  it.only("the getVehicles function shoud return a cleaned vehicle Object", async () => {
+    const mockObject = [{name: 'sand buggy', model:'beater', vehicle_class: 'off-road', passengers: '4', notKey: 'should not be in final'}]
 
-    //console.log(returnedObj);
+    window.fetch = jest.fn().mockImplementation(() => 
+      Promise.resolve({
+        status: 200,
+        json: () => Promise.resolve(mockObject)
+      }))
+
+    const returnedObj = await cleaner.getVehicles();
+
+    console.log(returnedObj);
   })
 
   it("the getPlanets function should call cleaned planets function and return a cleaned planets array ", async() => {
