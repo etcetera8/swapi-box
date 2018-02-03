@@ -20,8 +20,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.cleaner = new Cleaner();
-    //this.apiCall('films')
+    try {
+     this.apiCall('films');
+    }
+    catch(err) {
+      console.log('err')
+    }
   }
 
   apiCall(resource) {
