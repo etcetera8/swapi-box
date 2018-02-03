@@ -83,13 +83,6 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       }
     })
 
-  if (activeCategory==='planets') {
-    return (
-      <section className='CardContainer'>
-        {planetCards}
-      </section>
-    )
-  }
 
   if (activeCategory === null) {
     return (
@@ -97,6 +90,14 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         <p>welcome</p>
       </section>
     ) 
+  }
+
+  if (activeCategory==='planets') {
+    return (
+      <section className='CardContainer'>
+        {planetCards}
+      </section>
+    )
   }
 
   if (activeCategory=== 'people') {
