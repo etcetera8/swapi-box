@@ -13,7 +13,7 @@ const ScrollContainer = ( {movieData} ) => {
         <p>{scrollText}</p>
         <h3>{releaseDate}</h3>
         <h2>{title}</h2>
-        <h3>Episode: {episode}</h3>
+        <h3>Episode {episode}</h3>
       </div>
     </section>
   )

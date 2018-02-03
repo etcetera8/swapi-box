@@ -22,7 +22,7 @@ class App extends Component {
 
   componentDidMount() {
     try {
-     //this.randomMovieScroll('films');
+     this.randomMovieScroll('films');
     }
     catch(err) {
       return 'err'

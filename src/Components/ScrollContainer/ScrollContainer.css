@@ -1,7 +1,7 @@
 .ScrollContainer {
   display: flex;
   justify-content: center;
-  height: 300px;
+  height: 275px;
   perspective: 150px;
   color: #f3da4a;
   font-family: 'Pathway Gothic One', sans-serif;
@@ -16,14 +16,15 @@
 }
 
 .swapi-title {
-  font-size: 2em;
+  font-size: 1.5em;
+  margin: 150px 50px 0 50px;
 }
 
 .crawl {
   position: relative;
   top: -100px;
   transform-origin: 50% 100%; 
-  animation: crawl 60s linear;
+  animation: crawl 55s linear;
 }
 
 @keyframes crawl {
