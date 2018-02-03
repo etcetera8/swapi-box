@@ -1,23 +1,23 @@
 import {fetchAndJson} from './api';
 
 describe('api', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     const mockObj = {"name": 'luke', "homeworld": 'tattooine'}
     window.fetch = jest.fn().mockImplementation(() => 
       Promise.resolve({
         status: 200,
-        json: ()=> Promise.resolve(mockObj)
+        json: () => Promise.resolve(mockObj)
       }))
   })
 
   it('fetchAndJson should return data object once promise resolves', async () => {
     const expected = {"name": 'luke', "homeworld": 'tattooine'};
-    const actual = await fetchAndJson()
+    const actual = await fetchAndJson('www.thing.com')
     expect(actual).toEqual(expected)
   })
 
   it('should call the data with the correct params', () => {
-    const url=`https://swapi.co/api`
+    const url=`https://swapi.co/api`;
 
     fetchAndJson(url)
     expect(window.fetch).toHaveBeenCalledWith(url)

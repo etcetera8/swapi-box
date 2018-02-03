@@ -37,6 +37,7 @@ export default class SwapiCleaner {
 
   getPlanets = async() => {
     const arrayResults = await fetchAndJson(`${this.root}planets`)
+    debugger;
     const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
     return cleanedPlanets
   }
@@ -60,7 +61,7 @@ export default class SwapiCleaner {
   cleanResidents = async(residents) => {
     const unresolvedResidents = await residents.map(async (residentUrl) => {
       const residentObject = await fetchAndJson(residentUrl);
-      const {name} = residentObject;
+      const { name }  = residentObject;
       return (name)
     })
     return Promise.all(unresolvedResidents);
@@ -68,6 +69,7 @@ export default class SwapiCleaner {
 
   getPeople = async() => {
       const arrayResults = await fetchAndJson(`${this.root}people`)
+      debugger;
       const cleanedHomeworld = await this.cleanHomeworld(arrayResults.results)
       const cleanedSpecies = await this.cleanSpecies(cleanedHomeworld);
       return cleanedSpecies;
@@ -75,6 +77,7 @@ export default class SwapiCleaner {
 
   cleanHomeworld = async(peopleArray) => {
     const unresolvedPeople = await peopleArray.map(async (person) => {
+      debugger;
       const homeworldObject = await fetchAndJson(person.homeworld)
       const { name, population } = homeworldObject;
       return ({...person, homeworld: name, population })      
