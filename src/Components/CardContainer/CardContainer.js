@@ -102,7 +102,9 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       {activeCategory === 'favorites' && favoriteCards.length === 0 && 
           <h2 className="message">No favorites selected <br /> <br /> Find some and come back here to see them!</h2>
       }
-      {favoriteCards}
+      {activeCategory === 'favorites' && favoriteCards.length > 0 && 
+        favoriteCards
+      }
       </section>
     ) 
 }
