@@ -21,7 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     try {
-     this.apiCall('films');
+     //this.apiCall('films');
     }
     catch(err) {
       return 'err'
@@ -42,8 +42,11 @@ class App extends Component {
       const people = await this.cleaner.getPeople()
       this.setState({people})
       localStorage.setItem('people', JSON.stringify(people))
-    } else {
+    } else if (this.state.people.length === 0) {
+      console.log('from loc');
       this.setState({people: JSON.parse(localStorage.getItem("people"))})
+    } else {
+      this.setState({people: this.state.people})
     }
     this.setState({activeCategory: "people"})
   }
@@ -53,10 +56,12 @@ class App extends Component {
       const planets = await this.cleaner.getPlanets()
       this.setState({planets})
       localStorage.setItem('planets', JSON.stringify(planets))
-    } else {
+    } else if (this.state.planets.length === 0) {
       console.log("from loc");
       this.setState({planets: JSON.parse(localStorage.getItem('planets'))})
-    }
+    } else {
+      this.setState({planets: this.state.planets})
+    } 
     this.setState({activeCategory: "planets"})
   }
 
@@ -65,8 +70,11 @@ class App extends Component {
       const vehicles = await this.cleaner.getVehicles()
       this.setState({vehicles})
       localStorage.setItem('vehicles', JSON.stringify(vehicles))
-    } else {
+    } else if (this.state.vehicles.length === 0 ){
+      console.log('from loc');
       this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))})
+    } else {
+      this.setState({vehicles: this.state.vehicles})
     }
 
     this.setState({activeCategory: "vehicles"})
