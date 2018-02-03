@@ -49,8 +49,9 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
   )
 
   const favoriteCards = favorites.map((card, index) => {
+    let pick = '';
     if (card.category === 'people') {
-      return  <Card 
+      pick =  <Card 
         className={favorited(card.favorite)}
         setFavorite={setFavorite}
         name={card.name}
@@ -59,7 +60,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         population={card.population}
         key={index} />
     } else if (card.category === 'vehicles') {
-      return <VehicleCard
+      pick = <VehicleCard
         className={favorited(card.favorite)}
         setFavorite={setFavorite}
         name={card.name}
@@ -70,7 +71,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       />
     }
     else if (card.category === "planets") {
-      return <PlanetCard
+      pick = <PlanetCard
         className={favorited(card.favorite)}
         setFavorite={setFavorite}
         name={card.name}
@@ -81,50 +82,29 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         key={index}
       />
       }
+      return pick;
     })
 
-  if (activeCategory==='planets') {
     return (
-      <section className='CardContainer'>
-        {planetCards}
-      </section>
-    )
-  }
-
-  if (activeCategory === null) {
-    return (
-      <section className='CardContainer'> 
+     <section className='CardContainer'> 
+      { activeCategory === null &&
         <p>welcome</p>
+      } 
+      {activeCategory === 'people' && 
+        peopleCards
+      }
+      {activeCategory === 'planets' && 
+        planetCards
+      }
+      {activeCategory === 'vehicles' && 
+        vehicleCards
+      }
+      {activeCategory === 'favorites' && favoriteCards.length === 0 && 
+          <p>No favorites selected</p>
+      }
+      {favoriteCards}
       </section>
     ) 
-  }
-
-  if (activeCategory=== 'people') {
-    return (
-      <section className='CardContainer'> 
-        {peopleCards}
-      </section>
-    )
-  }
-
-  if (activeCategory === 'vehicles') {
-    return (
-      <section className='CardContainer'>
-        {vehicleCards}
-      </section>
-    )
-  }
-
-  if (activeCategory === 'favorites') {
-    return (
-      <section className='CardContainer'>
-      { favoriteCards.length === 0 &&
-        <p>No favorites selected</p>
-      }
-        {favoriteCards}
-      </section>
-    )
-  }
 }
 
 CardContainer.propTypes = {

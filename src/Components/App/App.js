@@ -3,6 +3,7 @@ import ScrollContainer from '../ScrollContainer/ScrollContainer';
 import CardContainer from '../CardContainer/CardContainer';
 import Button from '../Button/Button';
 import Cleaner from '../../helper';
+import {fetchAndJson} from '../../api'
 import './App.css';
 
 class App extends Component {
@@ -21,20 +22,17 @@ class App extends Component {
 
   componentDidMount() {
     try {
-     this.apiCall('films');
+     //this.randomMovieScroll('films');
     }
     catch(err) {
       return 'err'
     }
   }
 
-  apiCall(resource) {
+  randomMovieScroll = async (resource) => {
     const randNum = this.cleaner.randomMovieNumber();
-    fetch(`https://swapi.co/api/${resource}/${randNum}`)
-    .then( response => response.json())
-    .then( json => {
-      this.setState({ scrollText: this.cleaner.randomMovieCall(json) })
-    })
+    const movieObject = await fetchAndJson(`https://swapi.co/api/${resource}/${randNum}`)
+    this.setState({ scrollText: this.cleaner.randomMovieCall(movieObject) })
   }
 
   setPeopleState = async () => {
@@ -42,10 +40,12 @@ class App extends Component {
       const people = await this.cleaner.getPeople()
       this.setState({people})
       localStorage.setItem('people', JSON.stringify(people))
-    } else {
+    } else if (this.state.people.length === 0) {
       this.setState({people: JSON.parse(localStorage.getItem("people"))})
+    } else {
+      this.setState({people: this.state.people})
     }
-    this.setState({activeCategory: "people"})
+    this.setCategory('people')
   }
 
   setPlanetState = async () => {
@@ -53,11 +53,12 @@ class App extends Component {
       const planets = await this.cleaner.getPlanets()
       this.setState({planets})
       localStorage.setItem('planets', JSON.stringify(planets))
-    } else {
-      console.log("from loc");
+    } else if (this.state.planets.length === 0) {
       this.setState({planets: JSON.parse(localStorage.getItem('planets'))})
-    }
-    this.setState({activeCategory: "planets"})
+    } else {
+      this.setState({planets: this.state.planets})
+    } 
+    this.setCategory('planets')
   }
 
   setVehicleState = async () => {
@@ -65,28 +66,24 @@ class App extends Component {
       const vehicles = await this.cleaner.getVehicles()
       this.setState({vehicles})
       localStorage.setItem('vehicles', JSON.stringify(vehicles))
-    } else {
+    } else if (this.state.vehicles.length === 0 ){
       this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))})
+    } else {
+      this.setState({vehicles: this.state.vehicles})
     }
-
-    this.setState({activeCategory: "vehicles"})
+    this.setCategory('vehicles')
   }
 
   setFavoriteState = (cardName, category) => {
     const {favorites} = this.state;
 
-    const target = this.state[category].find(card => { 
-      card.name === cardName ? card.favorite = true : null;
-      return card.name === cardName;
-    });
+    const target = this.state[category].find(card => 
+      card.name === cardName ? card.favorite = true : null);
     
-    const filtered = this.state.favorites.filter(card => {
-      return card.name !== target.name
-    })
+    const filtered = this.state.favorites.filter(card =>card.name !== target.name);
 
     if (favorites.includes(target)) {
       target.favorite = false;
-      console.log(this.state[category].includes(target))
       this.setState({favorites: filtered })
     } else {
       const favoriteCards = [...favorites, target];
@@ -94,8 +91,8 @@ class App extends Component {
     }
   }
 
-  setCategory = () => {
-    this.setState({activeCategory: "favorites"})
+  setCategory = (category) => {
+    this.setState({activeCategory: category})
   }
 
   activeStatus = (category) => {
@@ -123,7 +120,7 @@ class App extends Component {
             resourceCall={this.setVehicleState}
             className={this.activeStatus('vehicles')}/>
           <button 
-            onClick={this.setCategory}
+            onClick={() => this.setCategory('favorites')}
             className={`Button ${this.activeStatus('favorites')}`}
             >
             {this.state.favorites.length} Favorites
