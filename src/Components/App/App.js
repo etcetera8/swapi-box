@@ -123,7 +123,7 @@ class App extends Component {
             onClick={() => this.setCategory('favorites')}
             className={`Button ${this.activeStatus('favorites')}`}
             >
-            {this.state.favorites.length} Favorites
+            <span id="num">{this.state.favorites.length}</span> Favorites
           </button>
         </nav>
         <CardContainer

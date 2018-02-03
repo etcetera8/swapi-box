@@ -1,16 +1,28 @@
 .Button {
   width: 125px;
   margin: 10px;
-  padding: 5px;
+  padding: 3px;
   font-size: 1.2em;
-  border: 2px solid yellow;
+  border: 2px solid #F1D441;
   background: none;
   color: yellow;
+  letter-spacing: 1px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.Button:focus {
+  outline:0;
+}
+
+.Button:hover {
+  box-shadow: 0 0 8px;
 }
 
 .activevehicles, 
 .activepeople,
 .activeplanets,
 .activefavorites {
-  background: red;
+  border: 2px solid #AD1F1E;
+  color: #AD1F1E;
+  box-shadow: 0 0 8px;
 }

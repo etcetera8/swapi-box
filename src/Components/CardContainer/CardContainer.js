@@ -88,7 +88,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
     return (
      <section className='CardContainer'> 
       { activeCategory === null &&
-        <p>welcome</p>
+        <h2 class="message">Welcome! <br /> <br /> Choose a category to get started with exploring the Star Wars Universe</h2>
       } 
       {activeCategory === 'people' && 
         peopleCards
@@ -100,7 +100,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         vehicleCards
       }
       {activeCategory === 'favorites' && favoriteCards.length === 0 && 
-          <p>No favorites selected</p>
+          <h2 class="message">No favorites selected <br /> <br /> Find some and come back here to see them!</h2>
       }
       {favoriteCards}
       </section>
