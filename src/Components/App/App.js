@@ -3,12 +3,12 @@ import ScrollContainer from '../ScrollContainer/ScrollContainer';
 import CardContainer from '../CardContainer/CardContainer';
 import Button from '../Button/Button';
 import Cleaner from '../../helper';
-import {fetchAndJson} from '../../api'
+import {fetchAndJson} from '../../api';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       scrollText: {},
       people: [],
@@ -17,16 +17,15 @@ class App extends Component {
       favorites: [],
       activeCategory: null,
       errorStatus: false
-    }
-    this.cleaner = new Cleaner()
+    };
+    this.cleaner = new Cleaner();
   }
 
   componentDidMount() {
     try {
-     this.randomMovieScroll('films');
-    }
-    catch(error) {
-      this.setState({errorStatus: true})
+      this.randomMovieScroll('films');
+    } catch (error) {
+      this.setState({errorStatus: true});
       return 'error';
     }
   }
@@ -49,7 +48,7 @@ class App extends Component {
         this.setState({people: this.state.people});
       }
       this.setCategory('people');
-    } catch(error) {
+    } catch (error) {
       this.setState({errorStatus: true});
       return "error";
     }
@@ -67,7 +66,7 @@ class App extends Component {
         this.setState({planets: this.state.planets});
       } 
       this.setCategory('planets');
-    } catch(error) {
+    } catch (error) {
       this.setState({errorStatus: true});
       return "error";
     }
@@ -85,9 +84,9 @@ class App extends Component {
         this.setState({vehicles: this.state.vehicles});
       }
       this.setCategory('vehicles');
-    } catch(error) {
+    } catch (error) {
       this.setState({errorStatus: true});
-      return "error"
+      return "error";
     }
   }
 
@@ -101,7 +100,7 @@ class App extends Component {
 
     if (favorites.includes(target)) {
       target.favorite = false;
-      this.setState({favorites: filtered })
+      this.setState({favorites: filtered });
     } else {
       const favoriteCards = [...favorites, target];
       this.setState({favorites: favoriteCards });
@@ -109,37 +108,38 @@ class App extends Component {
   }
 
   setCategory = (category) => {
-    this.setState({activeCategory: category})
+    this.setState({activeCategory: category});
   }
 
   activeStatus = (category) => {
     return this.state.activeCategory === category ?  
-      `active${category}` : ""
+      `active${category}` : "";
   }
 
   render() {
     return (
       <div className="App">
-      { 
-        this.state.errorState === true &&
-        <div className="error-div"> 
-              <h1 className="error-status">
-                Uh oh! There was an error getting the data. Please try reloading the page and choosing your category again.
-              </h1>
-        </div>
-      }
+        { 
+          this.state.errorState === true &&
+          <div className="error-div"> 
+            <h1 className="error-status">
+              Uh oh! There was an error getting the data. 
+              Please try reloading the page and choosing your category again.
+            </h1>
+          </div>
+        }
         <ScrollContainer movieData={this.state.scrollText}/>
         <nav className="button-container">
           <Button
             name="people"
             resourceCall={this.setPeopleState}
             className={this.activeStatus('people')}
-            />
+          />
           <Button 
             name="planets"
             resourceCall={this.setPlanetState}
             className={this.activeStatus('planets')}
-            />
+          />
           <Button 
             name="vehicles"
             resourceCall={this.setVehicleState}
@@ -147,7 +147,7 @@ class App extends Component {
           <button 
             onClick={() => this.setCategory('favorites')}
             className={`Button ${this.activeStatus('favorites')}`}
-            >
+          >
             <span id="num">{this.state.favorites.length}</span> Favorites
           </button>
         </nav>

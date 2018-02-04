@@ -1,8 +1,8 @@
-import { fetchAndJson } from './api' 
+import { fetchAndJson } from './api';
 
 export default class SwapiCleaner {
   constructor() {
-    this.root = `https://swapi.co/api/`
+    this.root = `https://swapi.co/api/`;
   }  
 
   randomMovieCall(movieObject) {
@@ -17,31 +17,30 @@ export default class SwapiCleaner {
 
   getVehicles = async() => {
     try {
-      const arrayResults = await fetchAndJson(`${this.root}vehicles`)
-        const cleanedVehicles = await arrayResults.results.map( vehicle => {
-          const {name, vehicle_class, passengers, model } = vehicle;
-          return ({
-            name, 
-            vehicle_class, 
-            passengers, 
-            model, 
-            favorite: false, 
-            category: 'vehicles'})
-        })
+      const arrayResults = await fetchAndJson(`${this.root}vehicles`);
+      const cleanedVehicles = await arrayResults.results.map( vehicle => {
+        const {name, vehicle_class, passengers, model } = vehicle;
+        return ({
+          name, 
+          vehicle_class, 
+          passengers, 
+          model, 
+          favorite: false, 
+          category: 'vehicles'});
+      });
       return Promise.all(cleanedVehicles);
-    } 
-    catch(error) {
+    } catch (error) {
       return "error";
     }
   }
 
   getPlanets = async() => {
     try {
-      const arrayResults = await fetchAndJson(`${this.root}planets`)
-      const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
+      const arrayResults = await fetchAndJson(`${this.root}planets`);
+      const cleanedPlanets = await this.cleanPlanet(arrayResults.results);
       return cleanedPlanets;
-    } catch(error) {
-      return "error"
+    } catch (error) {
+      return "error";
     }
   }
 
@@ -57,7 +56,7 @@ export default class SwapiCleaner {
         residents: cleanedResidents, 
         favorite: false, 
         category: 'planets'});
-    })
+    });
     return Promise.all(unresolvedPlanets);
   }
 
@@ -65,34 +64,34 @@ export default class SwapiCleaner {
     const unresolvedResidents = await residents.map(async (residentUrl) => {
       const residentObject = await fetchAndJson(residentUrl);
       const { name }  = residentObject;
-      return (name)
-    })
+      return (name);
+    });
     return Promise.all(unresolvedResidents);
   }
 
   getPeople = async() => {
     try {
-      const arrayResults = await fetchAndJson(`${this.root}people`)
-      const cleanedHomeworld = await this.cleanHomeworld(arrayResults.results)
+      const arrayResults = await fetchAndJson(`${this.root}people`);
+      const cleanedHomeworld = await this.cleanHomeworld(arrayResults.results);
       const cleanedSpecies = await this.cleanSpecies(cleanedHomeworld);
       return cleanedSpecies;
-    } catch(error) {
-      return "error"
+    } catch (error) {
+      return "error";
     }
   }
 
   cleanHomeworld = async(peopleArray) => {
     const unresolvedPeople = await peopleArray.map(async (person) => {
-      const homeworldObject = await fetchAndJson(person.homeworld)
+      const homeworldObject = await fetchAndJson(person.homeworld);
       const { name, population } = homeworldObject;
-      return ({...person, homeworld: name, population })      
-    })
-    return Promise.all(unresolvedPeople)
+      return ({...person, homeworld: name, population });
+    });
+    return Promise.all(unresolvedPeople);
   }   
 
   cleanSpecies = async(peopleArray) => {
     const unresolvedPeople = await peopleArray.map(async (person) => {
-      const species = await fetchAndJson(person.species)
+      const species = await fetchAndJson(person.species);
       const {name} = species;
       const { homeworld, population } = person;
       return ({
@@ -102,41 +101,41 @@ export default class SwapiCleaner {
         species: name,
         favorite: false,
         category: 'people'
-      })
-    })
-    return Promise.all(unresolvedPeople)
+      });
+    });
+    return Promise.all(unresolvedPeople);
   }
 
   randomMovieNumber = () => {
-    return Math.floor(Math.random() * 7 + 1)
+    return Math.floor(Math.random() * 7 + 1);
   }
 
   romanize = (num) => {
     let romNumeral = '';
     switch (num) {
-      case 1:
-        romNumeral = "I"
-        break;
-      case 2: 
-        romNumeral = "II"
-        break;
-      case 3:
-        romNumeral = "III"
-        break;
-      case 4: 
-        romNumeral = "IV"
-        break;
-      case 5: 
-        romNumeral = "V"
-        break;
-      case 6: 
-        romNumeral = "VI"
-        break;
-      case 7:
-        romNumeral = "VII"
-        break;
-      default:
-        return "II"
+    case 1:
+      romNumeral = "I";
+      break;
+    case 2: 
+      romNumeral = "II";
+      break;
+    case 3:
+      romNumeral = "III";
+      break;
+    case 4: 
+      romNumeral = "IV";
+      break;
+    case 5: 
+      romNumeral = "V";
+      break;
+    case 6: 
+      romNumeral = "VI";
+      break;
+    case 7:
+      romNumeral = "VII";
+      break;
+    default:
+      return "II";
     }
     return romNumeral;
   }
