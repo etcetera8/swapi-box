@@ -2,7 +2,7 @@
 
 exports[`VehicleCard should match the snapshot test 1`] = `
 <article
-  className="Card"
+  className="Card VehicleCard"
 >
   <header>
     <h1

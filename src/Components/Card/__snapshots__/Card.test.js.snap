@@ -2,7 +2,7 @@
 
 exports[`Card should match the snapshot test 1`] = `
 <article
-  className="Card"
+  className="Card PeopleCard"
 >
   <header>
     <h1
@@ -45,7 +45,7 @@ exports[`Card should match the snapshot test 1`] = `
         Population:
       </span>
        
-      20
+      2
     </li>
   </ul>
 </article>

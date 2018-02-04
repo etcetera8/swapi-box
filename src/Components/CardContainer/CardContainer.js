@@ -16,10 +16,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
     <Card 
       className={favorited(person.favorite)}
       setFavorite={setFavorite}
-      name={person.name}
-      species={person.species}
-      homeworld={person.homeworld}
-      population={person.population}
+      person={person}
       key={index} />
   )
 
@@ -54,10 +51,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       pick =  <Card 
         className={favorited(card.favorite)}
         setFavorite={setFavorite}
-        name={card.name}
-        species={card.species}
-        homeworld={card.homeworld}
-        population={card.population}
+        person={card}
         key={index} />
     } else if (card.category === 'vehicles') {
       pick = <VehicleCard

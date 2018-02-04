@@ -7,15 +7,12 @@ import { shallow } from 'enzyme';
 describe('Card', () => {
   let wrapper;
   const mockFunction = jest.fn();
-  
+  const mockPerson = {name:'luke', species:'human', homeworld:'naboo', population: '2'};
   beforeEach( () => {
     wrapper = shallow(<Card
                         className={'activepeople'}
                         setFavorite={mockFunction}
-                        name={'luke'}
-                        species={'human'}
-                        homeworld={'naboo'}
-                        population={'20'}
+                        person={mockPerson}
                         key={1}
                       />)
   })

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import './PeopleCard.css';
 import './Card.css';
 
-const Card = ({name, species, homeworld, population, setFavorite, className}) => {
+const Card = ({person, setFavorite, className}) => {
+  const {name, homeworld, species, population} = person;
   return (
     <article className='Card PeopleCard'> 
       <header>
@@ -20,10 +21,12 @@ const Card = ({name, species, homeworld, population, setFavorite, className}) =>
 }
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
-  species: PropTypes.string.isRequired,
-  homeworld: PropTypes.string.isRequired,
-  population: PropTypes.string.isRequired,
+  person: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    homeworld: PropTypes.string.isRequired,
+    species: PropTypes.string.isRequired,
+    population: PropTypes.string.isRequired,
+  }),
   setFavorite: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired
 };
