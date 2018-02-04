@@ -1,9 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CardContainer from './CardContainer';
+import VehicleCard from './VehicleCard';
 import { shallow } from 'enzyme';
 
- it('snapshot test', () => {
-
-    //expect(wrapper).toMatchSnapshot();
+describe('VehicleCard', () => {
+  let wrapper;
+  const mockFunction = jest.fn();
+  
+  beforeEach( () => {
+    wrapper = shallow(<VehicleCard
+                        className={'bike'}
+                        setFavorite={mockFunction}
+                        name={'racer'}
+                        model={'speedy'}
+                        passengers={'20'}
+                        vehicle_class={'old'}
+                        key={1}
+                      />)
   })
+
+  it('should match the snapshot test', () => {
+    expect(wrapper).toMatchSnapshot();
+  })
+})

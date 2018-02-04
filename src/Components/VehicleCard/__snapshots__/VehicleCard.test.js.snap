@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VehicleCard should match the snapshot test 1`] = `
+<article
+  className="Card"
+>
+  <header>
+    <h1
+      className="name"
+    >
+      racer
+    </h1>
+    <button
+      className="favorite bike"
+      onClick={[Function]}
+    >
+      ★
+    </button>
+  </header>
+  <ul
+    className="categories"
+  >
+    <li>
+      <span
+        className="key"
+      >
+        Model:
+      </span>
+       
+      speedy
+    </li>
+    <li>
+      <span
+        className="key"
+      >
+        Vehicle Class:
+      </span>
+       
+      old
+    </li>
+    <li>
+      <span
+        className="key"
+      >
+        Passengers:
+      </span>
+       
+      20
+    </li>
+  </ul>
+</article>
+`;

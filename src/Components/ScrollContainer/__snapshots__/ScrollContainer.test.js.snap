@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScrollContainer should match the snapshot test 1`] = `
+<section
+  className="ScrollContainer"
+>
+  <div
+    className="crawl"
+  >
+    <h1
+      className="swapi-title"
+    >
+      SWAPI-BOX 
+    </h1>
+    <br />
+    <p>
+      once upon a time
+    </p>
+    <h3>
+      05-1985
+    </h3>
+    <h2>
+      A new Hope
+    </h2>
+    <h3>
+      Episode 
+      v
+    </h3>
+  </div>
+</section>
+`;

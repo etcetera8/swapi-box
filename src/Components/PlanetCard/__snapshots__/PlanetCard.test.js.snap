@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlanetCard should match the snapshot test 1`] = `
+<article
+  className="Card"
+>
+  <header>
+    <h1
+      className="name"
+    >
+      naboo
+    </h1>
+    <button
+      className="favorite activepeople"
+      onClick={[Function]}
+    >
+      ★
+    </button>
+  </header>
+  <ul
+    className="categories"
+  >
+    <li>
+      <span
+        className="key"
+      >
+        Climate:
+      </span>
+      desert
+    </li>
+    <li>
+      <span
+        className="key"
+      >
+        Terrain:
+      </span>
+        
+      dunes
+    </li>
+    <li>
+      <span
+        className="key"
+      >
+        Population:
+      </span>
+       
+      20
+    </li>
+    <li>
+      <span
+        className="key"
+      >
+        Residents:
+      </span>
+       
+      liea, darth, luke
+    </li>
+  </ul>
+</article>
+`;
