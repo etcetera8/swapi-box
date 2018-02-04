@@ -12,7 +12,7 @@ const VehicleCard = ({name, model, passengers, vehicle_class, setFavorite, class
       <ul className="categories">
        <li><span className='key'>Model:</span> {model}</li>
        <li><span className='key'>Vehicle Class:</span> {vehicle_class}</li>
-       <li><span className='key'>Passengaers:</span> {passengers}</li>
+       <li><span className='key'>Passengers:</span> {passengers}</li>
       </ul> 
     </article>
   )

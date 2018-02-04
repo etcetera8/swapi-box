@@ -1,38 +1,35 @@
 import {fetchAndJson} from './api';
-
 describe('api', () => {
-  beforeAll(() => {
-    const mockObj = {"name": 'luke', "homeworld": 'tattooine'}
+  beforeEach(() => {
+    const mockObj = {"name": 'luke', "homeworld": 'tattooine'};
     window.fetch = jest.fn().mockImplementation(() => 
       Promise.resolve({
         status: 200,
         json: () => Promise.resolve(mockObj)
-      }))
-  })
+      }));
+  });
 
-  it('fetchAndJson should return data object once promise resolves', async () => {
+  it('fetchAndJson returns data object once promise resolves', async () => {
     const expected = {"name": 'luke', "homeworld": 'tattooine'};
-    const actual = await fetchAndJson('www.thing.com')
-    expect(actual).toEqual(expected)
-  })
+    const actual = await fetchAndJson('www.thing.com');
+    expect(actual).toEqual(expected);
+  });
 
   it('should call the data with the correct params', () => {
     const url=`https://swapi.co/api`;
 
-    fetchAndJson(url)
-    expect(window.fetch).toHaveBeenCalledWith(url)
-  })
+    fetchAndJson(url);
+    expect(window.fetch).toHaveBeenCalledWith(url);
+  });
 
   it('should catch errors', async () => {
-      window.fetch = jest.fn().mockImplementation(() => 
+    window.fetch = jest.fn().mockImplementation(() => 
       Promise.reject({
         status: 404,
         json: () => Promise.reject("Error")
-      }))
-      const error = await fetchAndJson();
+      }));
+    const error = await fetchAndJson();
 
-      expect(error).toEqual("Error")
-
-  })
-
-})
+    expect(error).toEqual("Error");
+  });
+});
