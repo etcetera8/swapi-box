@@ -37,7 +37,8 @@ describe('App', ()=> {
       planets: [],
       vehicles: [],
       favorites: [],
-      activeCategory: null }
+      activeCategory: null,
+      errorStatus: false }
     expect(wrapper.state()).toEqual(expectedState)
   })
 

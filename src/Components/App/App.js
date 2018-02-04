@@ -15,7 +15,8 @@ class App extends Component {
       planets: [],
       vehicles: [],
       favorites: [],
-      activeCategory: null
+      activeCategory: null,
+      errorStatus: false
     }
     this.cleaner = new Cleaner()
   }
@@ -24,54 +25,70 @@ class App extends Component {
     try {
      this.randomMovieScroll('films');
     }
-    catch(err) {
-      return 'error'
+    catch(error) {
+      this.setState({errorStatus: true})
+      return 'error';
     }
   }
 
   randomMovieScroll = async (resource) => {
     const randNum = this.cleaner.randomMovieNumber();
-    const movieObject = await fetchAndJson(`https://swapi.co/api/${resource}/${randNum}`)
-    this.setState({ scrollText: this.cleaner.randomMovieCall(movieObject) })
+    const movieObject = await fetchAndJson(`https://swapi.co/api/${resource}/${randNum}`);
+    this.setState({ scrollText: this.cleaner.randomMovieCall(movieObject) });
   }
 
   setPeopleState = async () => {
-    if (!localStorage.getItem('people')) {
-      const people = await this.cleaner.getPeople()
-      this.setState({people})
-      localStorage.setItem('people', JSON.stringify(people))
-    } else if (this.state.people.length === 0) {
-      this.setState({people: JSON.parse(localStorage.getItem("people"))})
-    } else {
-      this.setState({people: this.state.people})
+    try {
+      if (!localStorage.getItem('people')) {
+        const people = await this.cleaner.getPeople();
+        this.setState({people});
+        localStorage.setItem('people', JSON.stringify(people));
+      } else if (this.state.people.length === 0) {
+        this.setState({people: JSON.parse(localStorage.getItem("people"))});
+      } else {
+        this.setState({people: this.state.people});
+      }
+      this.setCategory('people');
+    } catch(error) {
+      this.setState({errorStatus: true});
+      return "error";
     }
-    this.setCategory('people')
   }
 
   setPlanetState = async () => {
-    if (!localStorage.getItem('planets')) { 
-      const planets = await this.cleaner.getPlanets()
-      this.setState({planets})
-      localStorage.setItem('planets', JSON.stringify(planets))
-    } else if (this.state.planets.length === 0) {
-      this.setState({planets: JSON.parse(localStorage.getItem('planets'))})
-    } else {
-      this.setState({planets: this.state.planets})
-    } 
-    this.setCategory('planets')
+    try {
+      if (!localStorage.getItem('planets')) { 
+        const planets = await this.cleaner.getPlanets();
+        this.setState({planets});
+        localStorage.setItem('planets', JSON.stringify(planets));
+      } else if (this.state.planets.length === 0) {
+        this.setState({planets: JSON.parse(localStorage.getItem('planets'))});
+      } else {
+        this.setState({planets: this.state.planets});
+      } 
+      this.setCategory('planets');
+    } catch(error) {
+      this.setState({errorStatus: true});
+      return "error";
+    }
   }
 
   setVehicleState = async () => {
-    if (!localStorage.getItem('vehicles')) {
-      const vehicles = await this.cleaner.getVehicles()
-      this.setState({vehicles})
-      localStorage.setItem('vehicles', JSON.stringify(vehicles))
-    } else if (this.state.vehicles.length === 0 ){
-      this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))})
-    } else {
-      this.setState({vehicles: this.state.vehicles})
+    try {
+      if (!localStorage.getItem('vehicles')) {
+        const vehicles = await this.cleaner.getVehicles();
+        this.setState({vehicles});
+        localStorage.setItem('vehicles', JSON.stringify(vehicles));
+      } else if (this.state.vehicles.length === 0 ){
+        this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))});
+      } else {
+        this.setState({vehicles: this.state.vehicles});
+      }
+      this.setCategory('vehicles');
+    } catch(error) {
+      this.setState({errorStatus: true});
+      return "error"
     }
-    this.setCategory('vehicles')
   }
 
   setFavoriteState = (cardName, category) => {
@@ -103,6 +120,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      { 
+        this.state.errorState === true &&
+        <div className="error-div"> 
+              <h1 className="error-status">
+                Uh oh! There was an error getting the data. Please try reloading the page and choosing your category again.
+              </h1>
+        </div>
+      }
         <ScrollContainer movieData={this.state.scrollText}/>
         <nav className="button-container">
           <Button
