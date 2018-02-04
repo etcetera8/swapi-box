@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot 1`] = `
+<div
+  className="App"
+>
+  <ScrollContainer
+    movieData={
+      Object {
+        "episode": "v",
+        "releaseDate": "05-07-87",
+        "scrollText": "Once upon a time",
+        "title": "benjamins buttons",
+      }
+    }
+  />
+  <nav
+    className="button-container"
+  >
+    <Button
+      className="activepeople"
+      name="people"
+      resourceCall={[Function]}
+    />
+    <Button
+      className=""
+      name="planets"
+      resourceCall={[Function]}
+    />
+    <Button
+      className=""
+      name="vehicles"
+      resourceCall={[Function]}
+    />
+    <button
+      className="Button "
+      onClick={[Function]}
+    >
+      <span
+        id="num"
+      >
+        0
+      </span>
+       Favorites
+    </button>
+  </nav>
+  <CardContainer
+    activeCategory="people"
+    favorites={Array []}
+    people={
+      Array [
+        Object {
+          "favorite": true,
+          "homeworld": "naboo",
+          "name": "luke",
+          "population": "10",
+          "species": "human",
+        },
+      ]
+    }
+    planets={Array []}
+    setFavorite={[Function]}
+    vehicles={Array []}
+  />
+</div>
+`;

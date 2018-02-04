@@ -37,9 +37,8 @@ export default class SwapiCleaner {
 
   getPlanets = async() => {
     const arrayResults = await fetchAndJson(`${this.root}planets`)
-    debugger;
     const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
-    return cleanedPlanets
+    return cleanedPlanets;
   }
 
   cleanPlanet = async(planetArray) => {
@@ -69,7 +68,6 @@ export default class SwapiCleaner {
 
   getPeople = async() => {
       const arrayResults = await fetchAndJson(`${this.root}people`)
-      debugger;
       const cleanedHomeworld = await this.cleanHomeworld(arrayResults.results)
       const cleanedSpecies = await this.cleanSpecies(cleanedHomeworld);
       return cleanedSpecies;
@@ -77,7 +75,6 @@ export default class SwapiCleaner {
 
   cleanHomeworld = async(peopleArray) => {
     const unresolvedPeople = await peopleArray.map(async (person) => {
-      debugger;
       const homeworldObject = await fetchAndJson(person.homeworld)
       const { name, population } = homeworldObject;
       return ({...person, homeworld: name, population })      
@@ -131,7 +128,7 @@ export default class SwapiCleaner {
         romNumeral = "VII"
         break;
       default:
-        return "An episode"
+        return "II"
     }
     return romNumeral;
   }

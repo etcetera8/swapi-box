@@ -32,6 +32,7 @@ class App extends Component {
   randomMovieScroll = async (resource) => {
     const randNum = this.cleaner.randomMovieNumber();
     const movieObject = await fetchAndJson(`https://swapi.co/api/${resource}/${randNum}`)
+    const thing = await this.cleaner.randomMovieCall(movieObject)
     this.setState({ scrollText: this.cleaner.randomMovieCall(movieObject) })
   }
 
