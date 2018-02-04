@@ -6,15 +6,12 @@ import { shallow } from 'enzyme';
 describe('VehicleCard', () => {
   let wrapper;
   const mockFunction = jest.fn();
-  
+  const mockVehicle = {name:'racer', model: 'speedy', passengers:'20', vehicle_class:'old'}
   beforeEach( () => {
     wrapper = shallow(<VehicleCard
                         className={'bike'}
                         setFavorite={mockFunction}
-                        name={'racer'}
-                        model={'speedy'}
-                        passengers={'20'}
-                        vehicle_class={'old'}
+                        vehicle={mockVehicle}
                         key={1}
                       />)
   })

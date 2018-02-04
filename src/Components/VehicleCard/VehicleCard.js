@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './VehicleCard.css'
 
-const VehicleCard = ({name, model, passengers, vehicle_class, setFavorite, className}) => {
-
+const VehicleCard = ({vehicle, setFavorite, className}) => {
+  const {name, model, passengers, vehicle_class} = vehicle;
   return (
     <article className='Card VehicleCard'> 
       <header>
@@ -20,10 +20,12 @@ const VehicleCard = ({name, model, passengers, vehicle_class, setFavorite, class
 }
 
 VehicleCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  passengers: PropTypes.string.isRequired,
-  vehicle_class: PropTypes.string.isRequired,
+  vehicle: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    model: PropTypes.string.isRequired,
+    passengers: PropTypes.string.isRequired,
+    vehicle_class: PropTypes.string.isRequired,
+  }),
   setFavorite: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired
 }

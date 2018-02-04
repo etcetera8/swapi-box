@@ -6,16 +6,12 @@ import { shallow } from 'enzyme';
 describe('PlanetCard', () => {
   let wrapper;
   const mockFunction = jest.fn();
-  
+  const mockPlanet = {name:'naboo', climate:'desert', terrain:'dunes', population: '20', residents: ['liea', 'darth', 'luke']}
   beforeEach( () => {
     wrapper = shallow(<PlanetCard
                         className={'activepeople'}
                         setFavorite={mockFunction}
-                        name={'naboo'}
-                        climate={'desert'}
-                        terrain={'dunes'}
-                        population={'20'}
-                        residents={['liea', 'darth', 'luke']}
+                        planet={mockPlanet}
                         key={1}
                       />)
   })

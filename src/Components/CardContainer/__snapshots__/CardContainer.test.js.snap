@@ -6,12 +6,16 @@ exports[`CardContainer should match the snapshot test 1`] = `
 >
   <Card
     className=""
-    homeworld="naboo"
     key="0"
-    name="luke"
-    population="20"
+    person={
+      Object {
+        "homeworld": "naboo",
+        "name": "luke",
+        "population": "20",
+        "species": "human",
+      }
+    }
     setFavorite={[Function]}
-    species="human"
   />
 </section>
 `;
