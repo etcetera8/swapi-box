@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import './PlanetCard.css'
 const PlanetCard = ({name, climate, terrain, population, residents, setFavorite, className}) => {
   let resString = ''
   if (residents.length === 0) {
@@ -10,7 +10,7 @@ const PlanetCard = ({name, climate, terrain, population, residents, setFavorite,
   }
 
   return (
-    <article className='Card'> 
+    <article className='Card PlanetCard'> 
       <header>
         <h1 className="name">{name}</h1>
         <button onClick={() => setFavorite(name, 'planets')} className={`favorite ${className}`}>★</button>
