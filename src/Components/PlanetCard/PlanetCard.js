@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './PlanetCard.css'
-const PlanetCard = ({name, climate, terrain, population, residents, setFavorite, className}) => {
+const PlanetCard = ({planet, setFavorite, className}) => {
+  const {name, climate, terrain, population, residents} = planet;
   let resString = ''
   if (residents.length === 0) {
     resString = 'N/A'
@@ -26,11 +27,13 @@ const PlanetCard = ({name, climate, terrain, population, residents, setFavorite,
 }
 
 PlanetCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  climate: PropTypes.string.isRequired,
-  terrain: PropTypes.string.isRequired,
-  population: PropTypes.string.isRequired,
-  residents: PropTypes.array.isRequired,
+  planet: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    climate: PropTypes.string.isRequired,
+    terrain: PropTypes.string.isRequired,
+    population: PropTypes.string.isRequired,
+    residents: PropTypes.array.isRequired
+  }),
   setFavorite: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired
 }

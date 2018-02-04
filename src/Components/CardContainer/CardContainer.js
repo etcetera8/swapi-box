@@ -24,11 +24,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
     <PlanetCard
       className={favorited(planet.favorite)}
       setFavorite={setFavorite}
-      name={planet.name}
-      climate={planet.climate}
-      terrain={planet.terrain}
-      population={planet.population}
-      residents={planet.residents}
+      planet={planet}
       key={index}
     />
   )
@@ -68,11 +64,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       pick = <PlanetCard
         className={favorited(card.favorite)}
         setFavorite={setFavorite}
-        name={card.name}
-        climate={card.climate}
-        terrain={card.terrain}
-        population={card.population}
-        residents={card.residents}
+        planet={card}
         key={index}
       />
       }
