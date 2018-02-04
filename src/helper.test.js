@@ -29,7 +29,6 @@ describe('Cleaner function', () => {
   })
 
   describe('getVehicles function', () => {
-
     const mockObjectArray = [{name: 'sand buggy', model:'beater', vehicle_class: 'off-road', passengers: '4', notKey: 'should not be in final'}]
     const expectedArray = [{name: 'sand buggy', vehicle_class: 'off-road', passengers: '4', model: 'beater', favorite: false, category: 'vehicles' }]
 

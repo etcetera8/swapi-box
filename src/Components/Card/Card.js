@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './PeopleCard.css';
 import './Card.css';
 
 const Card = ({name, species, homeworld, population, setFavorite, className}) => {
   return (
-    <article className='Card'> 
+    <article className='Card PeopleCard'> 
       <header>
         <h1 className="name">{name}</h1>
         <button onClick={() => setFavorite(name, 'people')} className={`favorite ${className}`}>★</button>

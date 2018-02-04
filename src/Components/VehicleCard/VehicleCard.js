@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './VehicleCard.css'
 
 const VehicleCard = ({name, model, passengers, vehicle_class, setFavorite, className}) => {
 
   return (
-    <article className='Card'> 
+    <article className='Card VehicleCard'> 
       <header>
         <h1 className="name">{name}</h1>
         <button onClick={() => setFavorite(name, 'vehicles')} className={`favorite ${className}`}>★</button>
