@@ -15,3 +15,12 @@
 #num {
   color: #AD1F1E;
 }
+
+.error-status {
+  color: #AD1F1E;
+}
+
+.error-div {
+  background: #000;
+  height: 100vh;
+}
