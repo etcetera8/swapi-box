@@ -33,10 +33,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
    <VehicleCard 
       className={favorited(vehicle.favorite)}
       setFavorite={setFavorite}
-      name={vehicle.name}
-      model={vehicle.model}
-      passengers={vehicle.passengers}
-      vehicle_class={vehicle.vehicle_class}
+      vehicle={vehicle}
       key={index}     
     />
   )
@@ -44,7 +41,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
   const favoriteCards = favorites.map((card, index) => {
     let pick = '';
     if (card.category === 'people') {
-      pick =  <Card 
+      pick = <Card 
         className={favorited(card.favorite)}
         setFavorite={setFavorite}
         person={card}
@@ -53,10 +50,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       pick = <VehicleCard
         className={favorited(card.favorite)}
         setFavorite={setFavorite}
-        name={card.name}
-        model={card.model}
-        passengers={card.passengers}
-        vehicle_class={card.vehicle_class}
+        vehicle={card}
         key={index}    
       />
     }
