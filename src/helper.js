@@ -30,15 +30,19 @@ export default class SwapiCleaner {
         })
       return Promise.all(cleanedVehicles);
     } 
-    catch(err) {
-      return err;
+    catch(error) {
+      return "error";
     }
   }
 
   getPlanets = async() => {
-    const arrayResults = await fetchAndJson(`${this.root}planets`)
-    const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
-    return cleanedPlanets;
+    try {
+      const arrayResults = await fetchAndJson(`${this.root}planets`)
+      const cleanedPlanets = await this.cleanPlanet(arrayResults.results)
+      return cleanedPlanets;
+    } catch(error) {
+      return "error"
+    }
   }
 
   cleanPlanet = async(planetArray) => {
@@ -67,10 +71,14 @@ export default class SwapiCleaner {
   }
 
   getPeople = async() => {
+    try {
       const arrayResults = await fetchAndJson(`${this.root}people`)
       const cleanedHomeworld = await this.cleanHomeworld(arrayResults.results)
       const cleanedSpecies = await this.cleanSpecies(cleanedHomeworld);
       return cleanedSpecies;
+    } catch(error) {
+      return "error"
+    }
   }
 
   cleanHomeworld = async(peopleArray) => {
