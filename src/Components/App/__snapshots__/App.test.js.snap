@@ -19,16 +19,19 @@ exports[`App should match the snapshot 1`] = `
   >
     <Button
       className="activepeople"
+      func={[Function]}
       name="people"
       resourceCall={[Function]}
     />
     <Button
       className=""
+      func={[Function]}
       name="planets"
       resourceCall={[Function]}
     />
     <Button
       className=""
+      func={[Function]}
       name="vehicles"
       resourceCall={[Function]}
     />
