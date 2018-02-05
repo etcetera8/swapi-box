@@ -1,18 +1,18 @@
 import {fetchAndJson} from './api';
+import {mockPerson} from './mockData';
+
 describe('api', () => {
   beforeEach(() => {
-    const mockObj = {"name": 'luke', "homeworld": 'tattooine'};
     window.fetch = jest.fn().mockImplementation(() => 
       Promise.resolve({
         status: 200,
-        json: () => Promise.resolve(mockObj)
+        json: () => Promise.resolve(mockPerson)
       }));
   });
 
   it('fetchAndJson returns data object once promise resolves', async () => {
-    const expected = {"name": 'luke', "homeworld": 'tattooine'};
     const actual = await fetchAndJson('www.thing.com');
-    expect(actual).toEqual(expected);
+    expect(actual).toEqual(mockPerson);
   });
 
   it('should call the data with the correct params', () => {
