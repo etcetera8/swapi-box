@@ -2,6 +2,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SwapiCleaner from './helper.js';
+import {
+          mockMovie,
+          expectedMovie,
+          mockVehicleArray,
+          expectedVehicleArray,
+          planetArray,
+          expectedPlanetArray,
+          mockPersonArray,
+          expectedPersonArray,
+          cleanedPersonArray
+        } from './mockData';
+
 describe('Cleaner function', () => {
   const cleaner = new SwapiCleaner();
 
@@ -17,21 +29,12 @@ describe('Cleaner function', () => {
   })
 
   it('the randomMovieCall function should take an array as a parameter and return an object', () => {
-    const mockMovie = {
-      'title': "Attack of the Clones",
-      'episode_id': 2,
-      'opening_crawl': "There is unrest in the Galactic", 
-      'release_date': "02-07-2004",
-      'producer': "Rick McCallum"
-    }
     const returnedObj = cleaner.randomMovieCall(mockMovie);
-    expect(returnedObj).toEqual({"episode": "II", "releaseDate": "02-07-2004", "scrollText": "There is unrest in the Galactic", "title": "Attack of the Clones"});
+
+    expect(returnedObj).toEqual(expectedMovie);
   })
 
   describe('getVehicles function', () => {
-    const mockObjectArray = [{name: 'sand buggy', model:'beater', vehicle_class: 'off-road', passengers: '4', notKey: 'should not be in final'}]
-    const expectedArray = [{name: 'sand buggy', vehicle_class: 'off-road', passengers: '4', model: 'beater', favorite: false, category: 'vehicles' }]
-
     it("the getVehicles function shoud return a cleaned vehicle Object", async () => {
       window.fetch = jest.fn().mockImplementation( () => 
          Promise.resolve({
@@ -39,13 +42,13 @@ describe('Cleaner function', () => {
           json: () => 
             Promise.resolve({
               status: 200, 
-              results: mockObjectArray
+              results: mockVehicleArray
             })
       }))
       const returnedObj = await cleaner.getVehicles();
 
       expect(typeof returnedObj).toEqual('object');
-      expect(returnedObj).toEqual(expectedArray)
+      expect(returnedObj).toEqual(expectedVehicleArray)
     })
 
     it("the getVehicles function should return an error if it is rejected", async () => {
@@ -55,26 +58,23 @@ describe('Cleaner function', () => {
       }))
       const returnedObj = await cleaner.getVehicles();
       
-      expect(returnedObj).toEqual('error')
+      expect(returnedObj).toEqual('error');
     })
   })
 
   describe('getPlanets function', () => {
     it("the getPlanets function should call cleaned planets function and return a cleaned planets array ", async() => {
-      const mockArray = [{"name": 'tattooine', "residents": ["place", "anotherPlace"], "population": '10', "climate": "hot", "terrain": 'permafrost', 'notKey': 'data not needed'}]
-      const expected =  [ { name: 'tattooine', terrain: 'permafrost', population: '10', climate: 'hot', residents: [ undefined, undefined ], favorite: false, category: 'planets' } ]
-
       window.fetch = jest.fn().mockImplementation(() => 
         Promise.resolve({
           status: 200,
           json: () => 
           Promise.resolve({
             status:200,
-            results: mockArray
+            results: planetArray
           })
         }))
       const returnedObj = await cleaner.getPlanets();
-      expect(returnedObj).toEqual(expected)
+      expect(returnedObj).toEqual(expectedPlanetArray)
     })
 
     it("the cleanResidents function should return an array of residents name" , async() => {
@@ -82,15 +82,16 @@ describe('Cleaner function', () => {
       window.fetch = jest.fn().mockImplementation(() => 
         Promise.resolve({
           status: 200,
+          name: 'luke',
           json: () => 
             Promise.resolve({
               status:200,
-              name: 'liea' 
-            }) 
-        }))
+              name: 'liea'
+            })
+        }));
 
-      const returnedArray = await cleaner.cleanResidents(mockUrl)
-      expect(returnedArray).toEqual(['liea'])
+      const returnedArray = await cleaner.cleanResidents(mockUrl);
+      expect(returnedArray).toEqual(['liea']);
     })
 
     it('the getPlanets function should return an error if it is rejected', async () => {
@@ -99,49 +100,43 @@ describe('Cleaner function', () => {
           status: 500
         }))
       const returnedObj = await cleaner.getPlanets();
-      expect(returnedObj).toEqual("error")
+      expect(returnedObj).toEqual("error");
     })
 })
   describe('getPeople function', () => { 
 
     it("the getPeople function should return an array of cleaned species", async () => {
-      const mockArray = [{name: 'po', homeworld: 'Naboo', population: "5280", species:'human'}]
-      const expected =[ { name: 'po', homeworld: undefined, population: undefined, species: undefined, favorite: false, category: 'people' } ]
-      
       window.fetch = jest.fn().mockImplementation(() => 
         Promise.resolve({
           status: 200,
           json: () => 
             Promise.resolve({
               status:200,
-              results: mockArray
+              results: mockPersonArray
             }) 
         }))
       const returnedObj = await cleaner.getPeople();
-      expect(returnedObj).toEqual(expected)
-    })
+      expect(returnedObj).toEqual(expectedPersonArray)
+    });
 
     it("the cleanHomeworld function should return a cleaned world object", async () => {
-      const mockArray = [{name: 'po', homeworld: 'Naboo', population: "5280", species:'human'}]
-      const expected = [{"homeworld": "naboo", "name": "po", "population": "5280", "species": "human"}]
       window.fetch = jest.fn().mockImplementation(() => 
         Promise.resolve({
           status: 200,
           json: () => 
             Promise.resolve({
               status:200,
-              results: mockArray,
+              results: mockPersonArray,
               name: 'naboo',
               population: '5280'
             }) 
         }))    
-      const returnedObj = await cleaner.cleanHomeworld(mockArray);
-      expect(returnedObj).toEqual(expected)
+      const returnedObj = await cleaner.cleanHomeworld(mockPersonArray);
+      expect(returnedObj).toEqual(cleanedPersonArray);
     })
 
     it("the cleanSpecies function should return a totally cleaned person", async () => {
-      const mockArray = [{"homeworld": "naboo", "name": "po", "population": "5280", "species": "endpoint"}]
-      const expected = [ { name: 'po', homeworld: 'naboo', population: '5280', species: 'human', favorite: false, category: 'people' } ]
+      const expected = [ { name: 'po', homeworld: 'Naboo', population: '5280', species: 'human', favorite: false, category: 'people' } ]
       window.fetch = jest.fn().mockImplementation(() => 
         Promise.resolve({
           status: 200,
@@ -151,7 +146,7 @@ describe('Cleaner function', () => {
               name: 'human'
             }) 
         })) 
-      const returnedObj = await cleaner.cleanSpecies(mockArray);
+      const returnedObj = await cleaner.cleanSpecies(mockPersonArray);
       expect(returnedObj).toEqual(expected);
     })
 
