@@ -15,7 +15,11 @@ const PlanetCard = ({planet, setFavorite, className}) => {
     <article className='Card PlanetCard'> 
       <header>
         <h1 className="name">{name}</h1>
-        <button onClick={() => setFavorite(name, 'planets')} className={`favorite ${className}`}>★</button>
+        <button 
+          onClick={() => setFavorite(name, 'planets')} 
+          className={`favorite ${className}`}>
+          ★
+        </button>
       </header>
       <ul className="categories">
         <li><span className='key'>Climate:</span>{climate}</li>
@@ -24,8 +28,8 @@ const PlanetCard = ({planet, setFavorite, className}) => {
         <li><span className='key'>Residents:</span> {resString}</li>
       </ul> 
     </article>
-  )
-}
+  );
+};
 
 PlanetCard.propTypes = {
   planet: PropTypes.shape({
@@ -37,6 +41,6 @@ PlanetCard.propTypes = {
   }),
   setFavorite: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired
-}
+};
 
 export default PlanetCard;

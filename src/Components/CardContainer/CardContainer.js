@@ -5,12 +5,18 @@ import VehicleCard from '../VehicleCard/VehicleCard';
 import './CardContainer.css';
 import PropTypes from 'prop-types';
 
-const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activeCategory}) => {
-
+const CardContainer = ({
+  people, 
+  planets, 
+  vehicles, 
+  favorites, 
+  setFavorite, 
+  activeCategory
+}) => {
   const favorited = (favorited) => {
-    const match = favorites.find(card => card.favorite === favorited)
-      return match ? "favorited" : "";
-  }
+    const match = favorites.find(card => card.favorite === favorited);
+    return match ? "favorited" : "";
+  };
 
   const peopleCards = people.map((person, index) => 
     <Card 
@@ -18,7 +24,7 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       setFavorite={setFavorite}
       person={person}
       key={index} />
-  )
+  );
 
   const planetCards = planets.map((planet, index) =>
     <PlanetCard
@@ -27,16 +33,16 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       planet={planet}
       key={index}
     />
-  )
+  );
 
   const vehicleCards = vehicles.map((vehicle, index) =>
-   <VehicleCard 
+    <VehicleCard 
       className={favorited(vehicle.favorite)}
       setFavorite={setFavorite}
       vehicle={vehicle}
       key={index}     
     />
-  )
+  );
 
   const favoriteCards = favorites.map((card, index) => {
     const {category, favorite} = card;
@@ -46,28 +52,27 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         className={favorited(favorite)}
         setFavorite={setFavorite}
         person={card}
-        key={index} />
+        key={index} />;
     } else if (category === 'vehicles') {
       active = <VehicleCard
         className={favorited(favorite)}
         setFavorite={setFavorite}
         vehicle={card}
         key={index}    
-      />
-    }
-    else if (category === "planets") {
+      />;
+    } else if (category === "planets") {
       active = <PlanetCard
         className={favorited(favorite)}
         setFavorite={setFavorite}
         planet={card}
         key={index}
-      />
-      }
-      return active;
-    })
+      />;
+    }
+    return active;
+  });
 
-    return (
-     <section className='CardContainer'> 
+  return (
+    <section className='CardContainer'> 
       { activeCategory === null &&
         <h2 className="message">
           Welcome! 
@@ -96,9 +101,9 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
       {activeCategory === 'favorites' && favoriteCards.length > 0 && 
         favoriteCards
       }
-      </section>
-    ) 
-}
+    </section>
+  );
+};
 
 CardContainer.propTypes = {
   people: PropTypes.array.isRequired,

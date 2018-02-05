@@ -8,7 +8,11 @@ const Card = ({person, setFavorite, className}) => {
     <article className='Card PeopleCard'> 
       <header>
         <h1 className="name">{name}</h1>
-        <button onClick={() => setFavorite(name, 'people')} className={`favorite ${className}`}>★</button>
+        <button 
+          onClick={() => setFavorite(name, 'people')} 
+          className={`favorite ${className}`}>
+          ★
+        </button>
       </header>
       <ul className="categories">
         <li><span className='key'>Homeworld:</span> {homeworld}</li>
@@ -16,15 +20,15 @@ const Card = ({person, setFavorite, className}) => {
         <li><span className='key'>Population:</span> {population}</li>
       </ul> 
     </article>
-  )
-}
+  );
+};
 
 Card.propTypes = {
   person: PropTypes.shape({
     name: PropTypes.string.isRequired,
     homeworld: PropTypes.string.isRequired,
     species: PropTypes.string.isRequired,
-    population: PropTypes.string.isRequired,
+    population: PropTypes.string.isRequired
   }),
   setFavorite: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired

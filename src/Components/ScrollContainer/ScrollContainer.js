@@ -16,8 +16,8 @@ const ScrollContainer = ( {movieData} ) => {
         <h3>Episode {episode}</h3>
       </div>
     </section>
-  )
-}
+  );
+};
 
 ScrollContainer.propTypes = {
   movieData: PropTypes.shape({
