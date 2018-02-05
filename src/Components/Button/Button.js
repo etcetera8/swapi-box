@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
-const Button = ({ name, resourceCall, className }) => {
+const Button = ({ name, resourceCall, className, func }) => {
   return (
     <button 
       className={`Button ${className}`} 
-      onClick={resourceCall}> 
+      onClick={() => resourceCall(name, func)}> 
       {name}
     </button>
   );

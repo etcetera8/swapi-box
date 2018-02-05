@@ -37,58 +37,24 @@ class App extends Component {
     this.setState({ scrollText: this.cleaner.randomMovieCall(movieObject) });
   }
 
-  setPeopleState = async () => {
-    try {
-      if (!localStorage.getItem('people')) {
-        const people = await this.cleaner.getPeople();
-        this.setState({people});
-        localStorage.setItem('people', JSON.stringify(people));
-      } else if (this.state.people.length === 0) {
-        this.setState({people: JSON.parse(localStorage.getItem("people"))});
-      } else {
-        this.setState({people: this.state.people});
-      }
-      this.setCategory('people');
-    } catch (error) {
-      this.setState({errorStatus: true});
-      return "error";
-    }
-  }
+  setTheState = async (category, func) => {
+   try {
+    console.log(category);
+      if (!localStorage.getItem(category)) { 
+        const promiseResponse = await func();
 
-  setPlanetState = async () => {
-    try {
-      if (!localStorage.getItem('planets')) { 
-        const planets = await this.cleaner.getPlanets();
-        this.setState({planets});
-        localStorage.setItem('planets', JSON.stringify(planets));
-      } else if (this.state.planets.length === 0) {
-        this.setState({planets: JSON.parse(localStorage.getItem('planets'))});
+        this.setState({[category]: promiseResponse});
+        localStorage.setItem(category, JSON.stringify(promiseResponse));
+      } else if (this.state[category].length === 0) {
+        this.setState({[category]: JSON.parse(localStorage.getItem(category))});
       } else {
-        this.setState({planets: this.state.planets});
+        this.setState({[category]: this.state[category]});
       } 
-      this.setCategory('planets');
+      this.setCategory(category);
     } catch (error) {
       this.setState({errorStatus: true});
       return "error";
-    }
-  }
-
-  setVehicleState = async () => {
-    try {
-      if (!localStorage.getItem('vehicles')) {
-        const vehicles = await this.cleaner.getVehicles();
-        this.setState({vehicles});
-        localStorage.setItem('vehicles', JSON.stringify(vehicles));
-      } else if (this.state.vehicles.length === 0 ){
-        this.setState({vehicles: JSON.parse(localStorage.getItem('vehicles'))});
-      } else {
-        this.setState({vehicles: this.state.vehicles});
-      }
-      this.setCategory('vehicles');
-    } catch (error) {
-      this.setState({errorStatus: true});
-      return "error";
-    }
+    }  
   }
 
   setFavoriteState = (cardName, category) => {
@@ -134,17 +100,20 @@ class App extends Component {
         <nav className="button-container">
           <Button
             name="people"
-            resourceCall={this.setPeopleState}
+            func={this.cleaner.getPeople}
+            resourceCall={this.setTheState}
             className={this.activeStatus('people')}
           />
           <Button 
             name="planets"
-            resourceCall={this.setPlanetState}
+            func={this.cleaner.getPlanets}
+            resourceCall={this.setTheState}
             className={this.activeStatus('planets')}
           />
           <Button 
             name="vehicles"
-            resourceCall={this.setVehicleState}
+            func={this.cleaner.getVehicles}
+            resourceCall={this.setTheState}
             className={this.activeStatus('vehicles')}/>
           <button 
             onClick={() => this.setCategory('favorites')}
