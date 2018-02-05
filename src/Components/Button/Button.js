@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
-const Button = ({ name, resourceCall, className }) => {
+const Button = ({ name, resourceCall, className, func }) => {
   return (
     <button 
       className={`Button ${className}`} 
-      onClick={resourceCall}> 
+      onClick={() => resourceCall(name, func)}> 
       {name}
     </button>
   );
@@ -15,7 +15,8 @@ const Button = ({ name, resourceCall, className }) => {
 Button.propTypes = {
   name: PropTypes.string.isRequired,
   resourceCall: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  func: PropTypes.func.isRequired
 };
 
 export default Button;

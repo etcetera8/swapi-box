@@ -16,6 +16,7 @@ describe('App', ()=> {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<App />);
+    const mockArray = [{category:"people",favorite:false, homeworld:"Tatooine", name:"Luke Skywalker", population:"200000", species:"Human"}];
     global.localStorage = {
       getItem(keyword) {
         if (!global.localStorage[keyword]) {
@@ -27,6 +28,7 @@ describe('App', ()=> {
         global.localStorage[keyword] = value;
       }
     };
+    global.localStorage.people = mockArray;
   });
 
   it('has initial state with a scrollText object, people, planets, vehicles and favorites array, and activeCategory default set to null', () => {
@@ -66,39 +68,8 @@ describe('App', ()=> {
   });
 
   it("the setPeopleState function should update the people state to the array of people", async () => {
-    const mockObj = {"name": 'luke', "homeworld": 'tattooine'};
-    window.fetch = jest.fn().mockImplementation(() => 
-      Promise.resolve({
-        status: 200,
-        json: () => Promise.resolve({
-          status: 200,
-          results: [mockObj]
-        })
-      }));
-    const inst = wrapper.instance();
-    await inst.setPeopleState();
-
-    expect(wrapper.state().people.length).toBeGreaterThan(0);
-  });
-
-  it("the setPlanetState function should update the planet state to the array of planets", async () => {
-    const mockArray = [{
-      "name": 'tattooine', 
-      "residents": ["place", "anotherPlace"], 
-      "population": '10', 
-      "climate": "hot", 
-      "terrain": 'permafrost', 
-      'notKey': 'data not needed'
-    }];
-    const expected = [{
-      "category": "planets", 
-      "climate": "hot", 
-      "favorite": false, 
-      "name": "tattooine", 
-      "population": "10", 
-      "residents": [undefined, undefined], 
-      "terrain": "permafrost"
-    }];
+    const mockArray = [{category:"people",favorite:false, homeworld:"Tatooine", name:"Luke Skywalker", population:"200000", species:"Human"}];
+    const mockFunc = jest.fn()
     window.fetch = jest.fn().mockImplementation(() => 
       Promise.resolve({
         status: 200,
@@ -108,41 +79,9 @@ describe('App', ()=> {
         })
       }));
     const inst = wrapper.instance();
-    await inst.setPlanetState();
+    await inst.setTheState('people', mockFunc);
 
-    expect(wrapper.state().planets.length).toBeGreaterThan(0);
-    expect(wrapper.state().planets).toEqual(expected);
-  });
-
-  it("the setVehicleState function should update the vehicle state to array of vehicles", async () => {
-    const mockObjectArray = [{
-      name: 'sand buggy', 
-      model:'beater', 
-      vehicle_class: 'off-road', 
-      passengers: '4', 
-      notKey: 'should not be in final'
-    }];
-    const expectedArray = [{ 
-      name: 'sand buggy', 
-      vehicle_class: 'off-road', 
-      passengers: '4', model: 'beater', 
-      favorite: false, 
-      category: 'vehicles'
-    }];
-    window.fetch = jest.fn().mockImplementation( () => 
-      Promise.resolve({
-        status: 200,
-        json: () => 
-          Promise.resolve({
-            status: 200, 
-            results: mockObjectArray
-          })
-      }));
-
-    const inst = wrapper.instance();
-    await inst.setVehicleState();
-    expect(wrapper.state().vehicles.length).toBeGreaterThan(0);
-    expect(wrapper.state().vehicles).toEqual(expectedArray);
+    expect(wrapper.state().people).toEqual(mockArray);
   });
 
   it("the setFavoriteState should update the favoriteState when a card is clicked on and switch the key from false to favorite", () => {

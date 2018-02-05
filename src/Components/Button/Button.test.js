@@ -12,6 +12,7 @@ describe('Button', () => {
         name={'people'}
         resourceCall={mockFunction}
         className={'peopleActive'}
+        func={mockFunction}
       />);
   });
 
