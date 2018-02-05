@@ -1,21 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
 
 .CardContainer {
-  margin: 0 auto;
-  width: 80%;
-  min-height: 500px;
-  display: flex;
-  background: rgba(253,253,255, 0.2);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 100px;
+  justify-content: center;
+  margin: 0 auto 100px auto;
+  width: 80%;
+  min-height: 500px;
+  background: rgba(253,253,255, 0.2);
 }
 
 .message {
-  color: #F1D441;
   margin: 25px auto;
   text-align: center;
   letter-spacing: 2px;
+  color: #F1D441;
   font-family: 'Fjalla One', sans-serif;
 }

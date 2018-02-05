@@ -1,20 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './PlanetCard.css'
+import './PlanetCard.css';
+
 const PlanetCard = ({planet, setFavorite, className}) => {
   const {name, climate, terrain, population, residents} = planet;
-  let resString = ''
+  let resString = '';
   if (residents.length === 0) {
-    resString = 'N/A'
+    resString = 'N/A';
   } else {
-    resString = residents.join(", ")
+    resString = residents.join(", ");
   }
 
   return (
     <article className='Card PlanetCard'> 
       <header>
         <h1 className="name">{name}</h1>
-        <button onClick={() => setFavorite(name, 'planets')} className={`favorite ${className}`}>★</button>
+        <button 
+          onClick={() => setFavorite(name, 'planets')} 
+          className={`favorite ${className}`}>
+          ★
+        </button>
       </header>
       <ul className="categories">
         <li><span className='key'>Climate:</span>{climate}</li>
@@ -23,8 +28,8 @@ const PlanetCard = ({planet, setFavorite, className}) => {
         <li><span className='key'>Residents:</span> {resString}</li>
       </ul> 
     </article>
-  )
-}
+  );
+};
 
 PlanetCard.propTypes = {
   planet: PropTypes.shape({
@@ -36,6 +41,6 @@ PlanetCard.propTypes = {
   }),
   setFavorite: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired
-}
+};
 
 export default PlanetCard;

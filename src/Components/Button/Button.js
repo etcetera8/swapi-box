@@ -9,13 +9,13 @@ const Button = ({ name, resourceCall, className }) => {
       onClick={resourceCall}> 
       {name}
     </button>
-  )
-}
+  );
+};
 
 Button.propTypes = {
   name: PropTypes.string.isRequired,
   resourceCall: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired
 };
 
 export default Button;

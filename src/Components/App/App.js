@@ -32,7 +32,8 @@ class App extends Component {
 
   randomMovieScroll = async (resource) => {
     const randNum = this.cleaner.randomMovieNumber();
-    const movieObject = await fetchAndJson(`https://swapi.co/api/${resource}/${randNum}`);
+    const movieObject = 
+    await fetchAndJson(`https://swapi.co/api/${resource}/${randNum}`);
     this.setState({ scrollText: this.cleaner.randomMovieCall(movieObject) });
   }
 
@@ -96,7 +97,8 @@ class App extends Component {
     const target = this.state[category].find(card => 
       card.name === cardName ? card.favorite = true : null);
     
-    const filtered = this.state.favorites.filter(card =>card.name !== target.name);
+    const filtered = this.state.favorites.filter(card => 
+      card.name !== target.name);
 
     if (favorites.includes(target)) {
       target.favorite = false;
