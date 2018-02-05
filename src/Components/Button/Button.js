@@ -15,7 +15,8 @@ const Button = ({ name, resourceCall, className, func }) => {
 Button.propTypes = {
   name: PropTypes.string.isRequired,
   resourceCall: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  func: PropTypes.func.isRequired
 };
 
 export default Button;

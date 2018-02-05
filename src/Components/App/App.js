@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   setTheState = async (category, func) => {
-   try {
+    try {
       if (!localStorage.getItem(category)) { 
         const promiseResponse = await func();
         this.setState({[category]: promiseResponse});
