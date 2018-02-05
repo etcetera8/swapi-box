@@ -39,36 +39,42 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
   )
 
   const favoriteCards = favorites.map((card, index) => {
-    let pick = '';
-    if (card.category === 'people') {
-      pick = <Card 
-        className={favorited(card.favorite)}
+    const {category, favorite} = card;
+    let active = '';
+    if (category === 'people') {
+      active = <Card 
+        className={favorited(favorite)}
         setFavorite={setFavorite}
         person={card}
         key={index} />
-    } else if (card.category === 'vehicles') {
-      pick = <VehicleCard
-        className={favorited(card.favorite)}
+    } else if (category === 'vehicles') {
+      active = <VehicleCard
+        className={favorited(favorite)}
         setFavorite={setFavorite}
         vehicle={card}
         key={index}    
       />
     }
-    else if (card.category === "planets") {
-      pick = <PlanetCard
-        className={favorited(card.favorite)}
+    else if (category === "planets") {
+      active = <PlanetCard
+        className={favorited(favorite)}
         setFavorite={setFavorite}
         planet={card}
         key={index}
       />
       }
-      return pick;
+      return active;
     })
 
     return (
      <section className='CardContainer'> 
       { activeCategory === null &&
-        <h2 className="message">Welcome! <br /> <br /> Choose a category to get started with exploring the Star Wars Universe</h2>
+        <h2 className="message">
+          Welcome! 
+          <br /> 
+          <br /> 
+          Choose a category to get started with exploring the Star Wars Universe
+        </h2>
       } 
       {activeCategory === 'people' && 
         peopleCards
@@ -80,7 +86,12 @@ const CardContainer = ({people, planets, vehicles, favorites, setFavorite, activ
         vehicleCards
       }
       {activeCategory === 'favorites' && favoriteCards.length === 0 && 
-          <h2 className="message">No favorites selected <br /> <br /> Find some and come back here to see them!</h2>
+          <h2 className="message">
+            No favorites selected 
+            <br /> 
+            <br /> 
+            Find some and come back here to see them!
+          </h2>
       }
       {activeCategory === 'favorites' && favoriteCards.length > 0 && 
         favoriteCards

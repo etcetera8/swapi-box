@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './VehicleCard.css'
+import './VehicleCard.css';
 
 const VehicleCard = ({vehicle, setFavorite, className}) => {
   const {name, model, passengers, vehicle_class} = vehicle;

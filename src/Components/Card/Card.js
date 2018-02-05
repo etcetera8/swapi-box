@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './PeopleCard.css';
 import './Card.css';
 
 const Card = ({person, setFavorite, className}) => {

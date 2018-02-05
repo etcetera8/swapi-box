@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './PlanetCard.css'
+import './PlanetCard.css';
+
 const PlanetCard = ({planet, setFavorite, className}) => {
   const {name, climate, terrain, population, residents} = planet;
-  let resString = ''
+  let resString = '';
   if (residents.length === 0) {
-    resString = 'N/A'
+    resString = 'N/A';
   } else {
-    resString = residents.join(", ")
+    resString = residents.join(", ");
   }
 
   return (

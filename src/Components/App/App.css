@@ -1,15 +1,15 @@
 .App {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 .button-container {
   display: flex;
-  width: 80%;
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto; 
+  width: 80%;
 }
 
 #num {
