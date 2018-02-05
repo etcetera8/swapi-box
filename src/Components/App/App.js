@@ -56,20 +56,20 @@ class App extends Component {
   }
 
   setFavoriteState = (cardName, category) => {
-    const {favorites} = this.state;
+    let {favorites} = this.state;
 
     const target = this.state[category].find(card => 
       card.name === cardName ? card.favorite = true : null);
     
-    const filtered = this.state.favorites.filter(card => 
+    const filtered = favorites.filter(card => 
       card.name !== target.name);
 
     if (favorites.includes(target)) {
       target.favorite = false;
       this.setState({favorites: filtered });
     } else {
-      const favoriteCards = [...favorites, target];
-      this.setState({favorites: favoriteCards });
+      favorites = [...favorites, target];
+      this.setState({favorites});
     }
   }
 

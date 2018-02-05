@@ -2,7 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {shallow } from 'enzyme';
+import {shallow, mount } from 'enzyme';
+
 
 window.fetch = jest.fn();
 
@@ -17,6 +18,7 @@ describe('App', ()=> {
   beforeEach(() => {
     wrapper = shallow(<App />);
     const mockArray = [{category:"people",favorite:false, homeworld:"Tatooine", name:"Luke Skywalker", population:"200000", species:"Human"}];
+    
     global.localStorage = {
       getItem(keyword) {
         if (!global.localStorage[keyword]) {
@@ -26,9 +28,9 @@ describe('App', ()=> {
       },
       setItem(keyword, value) {
         global.localStorage[keyword] = value;
-      }
+      },
+      people: mockArray
     };
-    global.localStorage.people = mockArray;
   });
 
   it('has initial state with a scrollText object, people, planets, vehicles and favorites array, and activeCategory default set to null', () => {
@@ -67,7 +69,7 @@ describe('App', ()=> {
     expect(Object.keys(wrapper.state().scrollText)).toEqual(['scrollText', 'title', 'releaseDate', 'episode']);
   });
 
-  it("the setPeopleState function should update the people state to the array of people", async () => {
+  it("the setTheState function should update the people state to the array of the input category", async () => {
     const mockArray = [{category:"people",favorite:false, homeworld:"Tatooine", name:"Luke Skywalker", population:"200000", species:"Human"}];
     const mockFunc = jest.fn()
     window.fetch = jest.fn().mockImplementation(() => 
@@ -169,4 +171,13 @@ describe('App', ()=> {
     });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('the Button Component should fire off the setTheState function and the activeStatus function and set the state for each', () => {
+    wrapper = mount(<App />)
+
+    wrapper.find('Button').first().simulate('click');
+    expect(wrapper.state().people.length).toEqual(1);
+    expect(wrapper.state().activeCategory).toEqual('people');
+  })
+
 });
